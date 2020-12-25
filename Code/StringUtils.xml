@@ -209,7 +209,7 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function Hash(s As String) As Integer</SourceLine>
-   <SourceLine>// Return the hash value of the given string, as used by RB's</SourceLine>
+   <SourceLine>// Return the hash value of the given string, as used by Xojo's</SourceLine>
    <SourceLine>// Variant and Dictionary classes.</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var v As Variant</SourceLine>
@@ -396,7 +396,7 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function CountFieldsQuoted(src as string, sep as string) As integer</SourceLine>
-   <SourceLine>// Equivalent to RB's CountFields() function, but respects quoted values</SourceLine>
+   <SourceLine>// Equivalent to Xojo's CountFields() function, but respects quoted values</SourceLine>
    <SourceLine>// Usage: </SourceLine>
    <SourceLine>//    s = """Hello, Kitty"", ""One"", ""Two, Three"""</SourceLine>
    <SourceLine>//    x = CountFieldsQuoted(s, ",")</SourceLine>
@@ -441,7 +441,7 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function NthFieldQuoted(src as string, sep as string, index as integer) As string</SourceLine>
-   <SourceLine>// Equivalent to RB's nthField() function, but respects quoted values</SourceLine>
+   <SourceLine>// Equivalent to Xojo's nthField() function, but respects quoted values</SourceLine>
    <SourceLine>// Usage: </SourceLine>
    <SourceLine>//    s = """Hello, Kitty"", ""One"", ""Two, Three"""</SourceLine>
    <SourceLine>//    s1 = nthFieldQuoted(s, ",", 3)</SourceLine>
@@ -688,7 +688,7 @@
    <SourceLine>// (or if startPos = -1, then from the end of the string).</SourceLine>
    <SourceLine>// If substr can't be found, returns 0.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var srcLen As Integer = source.Len</SourceLine>
+   <SourceLine>Var srcLen As Integer = source.Length</SourceLine>
    <SourceLine>if startPos = -1 then startPos = srcLen</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Here's an easy way...</SourceLine>
@@ -697,9 +697,9 @@
    <SourceLine>Var reversedSource As String = Reverse(source)</SourceLine>
    <SourceLine>Var reversedSubstr As String = Reverse(substr)</SourceLine>
    <SourceLine>Var reversedPos As Integer</SourceLine>
-   <SourceLine>reversedPos = InStr( srcLen - startPos + 1, reversedSource, reversedSubstr )</SourceLine>
-   <SourceLine>if reversedPos &lt; 1 then return 0</SourceLine>
-   <SourceLine>return srcLen - reversedPos - substr.Len + 2</SourceLine>
+   <SourceLine>reversedPos = reversedSource.IndexOf( srcLen - startPos , reversedSubstr )</SourceLine>
+   <SourceLine>if reversedPos = -1 then return -1</SourceLine>
+   <SourceLine>return srcLen - reversedPos - substr.Length </SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -722,8 +722,8 @@
    <SourceLine>// (or if startPosB = -1, then from the end of the string).</SourceLine>
    <SourceLine>// If substr can't be found, returns 0.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var srcLen As Integer = source.LenB</SourceLine>
-   <SourceLine>Var subLen As Integer = substr.LenB</SourceLine>
+   <SourceLine>Var srcLen As Integer = source.Bytes</SourceLine>
+   <SourceLine>Var subLen As Integer = substr.Bytes</SourceLine>
    <SourceLine>if startPosB = -1 then startPosB = srcLen</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// We'll do a simple sequential search.  A Boyer-Moore algorithm</SourceLine>
@@ -731,11 +731,11 @@
    <SourceLine>// whole algorithm to work backwards.  The sequential search will</SourceLine>
    <SourceLine>// be good enough in most cases anyway.</SourceLine>
    <SourceLine>Var posB As Integer</SourceLine>
-   <SourceLine>for posB = Min( srcLen - subLen + 1, startPosB ) downTo 1</SourceLine>
-   <SourceLine>if StrComp( MidB( source, posB, subLen ), substr, 0 ) = 0 then return posB</SourceLine>
+   <SourceLine>for posB = Min( srcLen - subLen, startPosB ) downTo 1</SourceLine>
+   <SourceLine>if source.MiddleBytes( posB, subLen ).Compare(substr, ComparisonOptions.CaseSensitive ) = 0 then return posB</SourceLine>
    <SourceLine>next posB</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return 0</SourceLine>
+   <SourceLine>return -1</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -2231,24 +2231,24 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function Trim(source As String, charsToTrim As String) As String</SourceLine>
-   <SourceLine>// This is an extended version of RB's Trim function that lets you specify</SourceLine>
+   <SourceLine>// This is an extended version of Xojo's Trim function that lets you specify</SourceLine>
    <SourceLine>// a set of characters to trim.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var srcLen As Integer = source.Len</SourceLine>
+   <SourceLine>Var srcLen As Integer = source.Length</SourceLine>
    <SourceLine>Var leftPos, i As Integer</SourceLine>
-   <SourceLine>for i = 1 to srcLen</SourceLine>
-   <SourceLine>if InStr( charsToTrim, Mid(source, i, 1) ) = 0 then exit</SourceLine>
+   <SourceLine>for i = 0 to srcLen</SourceLine>
+   <SourceLine>if charsToTrim.IndexOf( source.Middle( i, 1) ) = -1 then exit</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine>leftPos = i</SourceLine>
    <SourceLine>if leftPos &gt; srcLen then return ""</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var rightPos As Integer</SourceLine>
-   <SourceLine>for i = srcLen DownTo 1</SourceLine>
-   <SourceLine>if InStr( charsToTrim, Mid(source, i, 1) ) = 0 then exit</SourceLine>
+   <SourceLine>for i = srcLen DownTo 0</SourceLine>
+   <SourceLine>if charsToTrim.IndexOf( source.middle( i, 1) ) = -1 then exit</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine>rightPos = i</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return Mid( source, leftPos, rightPos - leftPos + 1 )</SourceLine>
+   <SourceLine>return source.Middle( leftPos, rightPos - leftPos + 1 ) </SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -2334,18 +2334,18 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function LTrim(source As String, charsToTrim As String) As String</SourceLine>
-   <SourceLine>// This is an extended version of RB's LTrim function that lets you specify</SourceLine>
+   <SourceLine>// This is an extended version of Xojo's LTrim function that lets you specify</SourceLine>
    <SourceLine>// a set of characters to trim.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var srcLen As Integer = source.Len</SourceLine>
+   <SourceLine>Var srcLen As Integer = source.Length</SourceLine>
    <SourceLine>Var leftPos, i As Integer</SourceLine>
-   <SourceLine>for i = 1 to srcLen</SourceLine>
-   <SourceLine>if InStr( charsToTrim, Mid(source, i, 1) ) = 0 then exit</SourceLine>
+   <SourceLine>for i = 0 to srcLen </SourceLine>
+   <SourceLine>if charsToTrim.IndexOf( source.Middle( i, 1) ) = -1 then exit</SourceLine>
    <SourceLine>next</SourceLine>
-   <SourceLine>leftPos = i</SourceLine>
+   <SourceLine>leftPos = i </SourceLine>
    <SourceLine>if leftPos &gt; srcLen then return ""</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return Mid( source, leftPos )</SourceLine>
+   <SourceLine>return source.Middle( leftPos )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -2364,17 +2364,17 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function RTrim(source As String, charsToTrim As String) As String</SourceLine>
-   <SourceLine>// This is an extended version of RB's RTrim function that lets you specify</SourceLine>
+   <SourceLine>// This is an extended version of Xojo's RTrim function that lets you specify</SourceLine>
    <SourceLine>// a set of characters to trim.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var srcLen As Integer = source.Len</SourceLine>
+   <SourceLine>Var srcLen As Integer = source.Length</SourceLine>
    <SourceLine>Var rightPos, i As Integer</SourceLine>
-   <SourceLine>for i = srcLen DownTo 1</SourceLine>
-   <SourceLine>if InStr( charsToTrim, Mid(source, i, 1) ) = 0 then exit</SourceLine>
+   <SourceLine>for i = srcLen DownTo 0</SourceLine>
+   <SourceLine>if charsToTrim.IndexOf( source.Middle(i, 1) )  = -1 then exit</SourceLine>
    <SourceLine>next</SourceLine>
-   <SourceLine>rightPos = i</SourceLine>
+   <SourceLine>rightPos = i + 1</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return Mid( source, 1, rightPos )</SourceLine>
+   <SourceLine>return source.Middle( 0, rightPos )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -2548,7 +2548,7 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function SplitQuoted(source As String, delimiter As String, removeQuotes as Boolean) As String()</SourceLine>
-   <SourceLine>// Same as RB's Split, except that it respects quoted strings.</SourceLine>
+   <SourceLine>// Same as Xojo's Split, except that it respects quoted strings.</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out() As String</SourceLine>
    <SourceLine></SourceLine>
@@ -2609,7 +2609,7 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function JoinQuoted(fields() as String, delimiter as String) As String</SourceLine>
-   <SourceLine>// Join the given strings with a delimiter, just like RB's intrinsic Join</SourceLine>
+   <SourceLine>// Join the given strings with a delimiter, just like Xojo's intrinsic Join</SourceLine>
    <SourceLine>// method, except that if any of the fields contains the delimiter,</SourceLine>
    <SourceLine>// that item will be surrounded by quotes in the output.  See</SourceLine>
    <SourceLine>// SplitQuoted for the inverse function.</SourceLine>
@@ -2619,18 +2619,18 @@
    <SourceLine>// way we don't mutate the array that's passed in.</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var quoted() As String</SourceLine>
-   <SourceLine>Var ub As Integer = UBound( fields )</SourceLine>
+   <SourceLine>Var ub As Integer = fields.LastIndex</SourceLine>
    <SourceLine>Redim quoted( ub )</SourceLine>
    <SourceLine>for i As Integer = 0 to ub</SourceLine>
    <SourceLine>Var fld As String = fields(i)</SourceLine>
-   <SourceLine>if Instr( fld, Delimiter ) &gt; 0 then</SourceLine>
+   <SourceLine>if fld.IndexOf( Delimiter ) &gt; -1 then</SourceLine>
    <SourceLine>quoted(i) = """" + fld + """"</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>quoted(i) = fld</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return Join( quoted, delimiter )</SourceLine>
+   <SourceLine>return string.FromArray( quoted, delimiter )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -2679,7 +2679,7 @@
    <SourceLine>// lowercase ASCII ranges from 97 to 122</SourceLine>
    <SourceLine>switchCase = (codepoint &gt;= 97 and codepoint &lt;= 122)</SourceLine>
    <SourceLine>else</SourceLine>
-   <SourceLine>// if not ASCII, use RB's routines to see if it'd be any different in upper case</SourceLine>
+   <SourceLine>// if not ASCII, use Xojo's routines to see if it'd be any different in upper case</SourceLine>
    <SourceLine>switchCase = c.compare( c.Uppercase, ComparisonOptions.CaseSensitive ) &lt;&gt; 0</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>else</SourceLine>
@@ -2687,7 +2687,7 @@
    <SourceLine>// uppercase ASCII ranges from 65 to 90</SourceLine>
    <SourceLine>switchCase = (codepoint &gt;= 65 and codepoint &lt;= 90)</SourceLine>
    <SourceLine>else</SourceLine>
-   <SourceLine>// if not ASCII, use RB's routines to see if it'd be any different in lower case</SourceLine>
+   <SourceLine>// if not ASCII, use Xojo's routines to see if it'd be any different in lower case</SourceLine>
    <SourceLine>switchCase = c.compare(c.Lowercase, ComparisonOptions.CaseSensitive ) &lt;&gt; 0</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>if switchCase then anyUpper = true</SourceLine>
@@ -2753,11 +2753,11 @@
    <SourceLine>Function Reverse(s As String) As String</SourceLine>
    <SourceLine>// Return s with the characters in reverse order.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if Len(s) &lt; 2 then return s</SourceLine>
+   <SourceLine>if s.length &lt; 2 then return s</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var characters() as String = Split( s, "" )</SourceLine>
+   <SourceLine>Var characters() as String = s.split( "" )</SourceLine>
    <SourceLine>Var leftIndex as Integer = 0</SourceLine>
-   <SourceLine>Var rightIndex as Integer = UBound(characters)</SourceLine>
+   <SourceLine>Var rightIndex as Integer = characters.LastIndex</SourceLine>
    <SourceLine>#pragma BackgroundTasks False</SourceLine>
    <SourceLine>While leftIndex &lt; rightIndex</SourceLine>
    <SourceLine>Var temp as String = characters(leftIndex)</SourceLine>
@@ -2766,7 +2766,7 @@
    <SourceLine>leftIndex = leftIndex + 1</SourceLine>
    <SourceLine>rightIndex = rightIndex - 1</SourceLine>
    <SourceLine>Wend</SourceLine>
-   <SourceLine>Return Join( characters, "" )</SourceLine>
+   <SourceLine>Return string.FromArray( characters, "" )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -2797,13 +2797,13 @@
    <SourceLine>// Loop over the bytes of the string until we find a 13 or 10.  A line ending should</SourceLine>
    <SourceLine>// be either 13 alone (Mac), 10 alone (Unix), or 13+10 (Windows).</SourceLine>
    <SourceLine>Var posB, maxPosB As Integer</SourceLine>
-   <SourceLine>maxPosB = LenB( s )</SourceLine>
-   <SourceLine>for posB = 1 to maxPosB</SourceLine>
-   <SourceLine>Var b As Integer = AscB( MidB( s, posB, 1 ) )</SourceLine>
+   <SourceLine>maxPosB = s.Bytes</SourceLine>
+   <SourceLine>for posB = 0 to maxPosB</SourceLine>
+   <SourceLine>Var b As Integer = s.MiddleBytes( posB, 1 ).AscByte</SourceLine>
    <SourceLine>if b = 10 then</SourceLine>
    <SourceLine>return Chr(10)</SourceLine>
    <SourceLine>elseif b = 13 then</SourceLine>
-   <SourceLine>if AscB( MidB( s, posB+1, 1 ) ) = 10 then return Chr(13) + Chr(10)</SourceLine>
+   <SourceLine>if s.MiddleBytes(posB+1, 1).AscByte = 10 then return Chr(13) + Chr(10)</SourceLine>
    <SourceLine>return Chr(13)</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>

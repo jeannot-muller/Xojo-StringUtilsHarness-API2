@@ -2725,16 +2725,15 @@
    <SourceLine>// This function undoes the encoding of case done by EncodeCase, resulting</SourceLine>
    <SourceLine>// in the original string.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var parts() As String = Split( s, "^" )</SourceLine>
-   <SourceLine>for i As Integer = 1 to UBound( parts ) step 2</SourceLine>
+   <SourceLine>Var parts() As String = s.split( "^" )</SourceLine>
+   <SourceLine>for i As Integer = 1 to parts.lastIndex step 2</SourceLine>
    <SourceLine>if parts(i) = "" then</SourceLine>
    <SourceLine>parts(i) = "^"</SourceLine>
    <SourceLine>else</SourceLine>
-   <SourceLine>parts(i) = Uppercase( parts(i) )</SourceLine>
+   <SourceLine>parts(i) = parts(i).Uppercase</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
-   <SourceLine>return Join( parts, "" )</SourceLine>
-   <SourceLine></SourceLine>
+   <SourceLine>return string.FromArray(parts, "")</SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
   <TextEncoding>134217984</TextEncoding>

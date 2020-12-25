@@ -312,13 +312,13 @@ Protected Module UnitTests
 
 	#tag Method, Flags = &h21
 		Private Sub TestInStrQuoted()
-		  ErrorIf StringUtils.InStrQuoted( "abcde", "c" ) <> 3
-		  ErrorIf StringUtils.InStrQuoted( "a""bc""de", "c" ) <> 0
-		  ErrorIf StringUtils.InStrQuoted( "a""bc""dedcba", "c" ) <> 9
-		  ErrorIf StringUtils.InStrQuoted( 6, "abcdedcba", "c" ) <> 7
-		  ErrorIf StringUtils.InStrQuoted( 6, "a""bc""dedcba", "c" ) <> 9
-		  ErrorIf StringUtils.InStrQuoted( "a""bc""d""ed""cba", "c" ) <> 11
-		  ErrorIf StringUtils.InStrQuoted( "a""bcdedcb""a", "c" ) <> 0
+		  ErrorIf StringUtils.InStrQuoted( "abcde", "c" ) <> 2
+		  ErrorIf StringUtils.InStrQuoted( "a""bc""de", "c" ) <> -1
+		  ErrorIf StringUtils.InStrQuoted( "a""bc""dedcba", "c" ) <> 8
+		  ErrorIf StringUtils.InStrQuoted( 6, "abcdedcba", "c" ) <> 6
+		  ErrorIf StringUtils.InStrQuoted( 6, "a""bc""dedcba", "c" ) <> 8
+		  ErrorIf StringUtils.InStrQuoted( "a""bc""d""ed""cba", "c" ) <> 10
+		  ErrorIf StringUtils.InStrQuoted( "a""bcdedcb""a", "c" ) <> -1
 		  
 		  
 		  

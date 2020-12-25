@@ -460,16 +460,16 @@
    <SourceLine></SourceLine>
    <SourceLine>// Harder case: both separator and quotation marks.</SourceLine>
    <SourceLine>// We'll use InStrQuoted to help us out.</SourceLine>
-   <SourceLine>Var sepLen As Integer = sep.Len</SourceLine>
-   <SourceLine>Var startPos As Integer = 1</SourceLine>
+   <SourceLine>Var sepLen As Integer = sep.Length </SourceLine>
+   <SourceLine>Var startPos As Integer = 0</SourceLine>
    <SourceLine>for i As Integer = 1 to index - 1</SourceLine>
    <SourceLine>Var sepPos As Integer = InStrQuoted( startPos, src, sep )</SourceLine>
-   <SourceLine>if sepPos = 0 then return ""</SourceLine>
+   <SourceLine>if sepPos = -1 then return ""</SourceLine>
    <SourceLine>startPos = sepPos + sepLen</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine>Var sepPos As Integer = InStrQuoted( startPos, src, sep )</SourceLine>
-   <SourceLine>if sepPos = 0 then return Mid( src, startPos )</SourceLine>
-   <SourceLine>return Mid( src, startPos, sepPos - startPos )</SourceLine>
+   <SourceLine>if sepPos = -1 then return src.middle(startPos)</SourceLine>
+   <SourceLine>return src.Middle( startPos, sepPos - startPos )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Old code is below for posterity.</SourceLine>
    <SourceLine>'Var c, n, startPos, endPos as integer</SourceLine>
@@ -2553,23 +2553,23 @@
    <SourceLine>Var out() As String</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Easy cases: no occurrences of the separator, or no quotation marks</SourceLine>
-   <SourceLine>if InStr( source, delimiter )=0 then</SourceLine>
+   <SourceLine>if source.IndexOf( delimiter ) = -1 then</SourceLine>
    <SourceLine>out = Array( source )</SourceLine>
-   <SourceLine>elseif InStr( source, """" )= 0 then</SourceLine>
-   <SourceLine>out = Split( source, delimiter )</SourceLine>
+   <SourceLine>elseif source.IndexOf( """" ) = -1 then</SourceLine>
+   <SourceLine>out = source.Split( delimiter )</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>// Harder case: both separator and quotation marks.</SourceLine>
    <SourceLine>// We'll use InStrQuoted to help us out.</SourceLine>
-   <SourceLine>Var delimiterLen As Integer = delimiter.Len</SourceLine>
-   <SourceLine>Var startPos As Integer = 1</SourceLine>
+   <SourceLine>Var delimiterLen As Integer = delimiter.Length</SourceLine>
+   <SourceLine>Var startPos As Integer = 0</SourceLine>
    <SourceLine>do</SourceLine>
    <SourceLine>Var delimiterPos As Integer = InStrQuoted( startPos, source, delimiter )</SourceLine>
-   <SourceLine>if delimiterPos = 0 then</SourceLine>
+   <SourceLine>if delimiterPos = -1 then</SourceLine>
    <SourceLine>// no more separators</SourceLine>
-   <SourceLine>out.Append Mid( source, startPos )</SourceLine>
+   <SourceLine>out.Add( source.Middle( startPos ))</SourceLine>
    <SourceLine>exit</SourceLine>
    <SourceLine>end if</SourceLine>
-   <SourceLine>out.Append Mid( source, startPos, delimiterPos - startPos )</SourceLine>
+   <SourceLine>out.Add( source.Middle( startPos, delimiterPos - startPos ) )</SourceLine>
    <SourceLine>startPos = delimiterPos + delimiterLen</SourceLine>
    <SourceLine>loop</SourceLine>
    <SourceLine>end if</SourceLine>
@@ -2578,13 +2578,13 @@
    <SourceLine>// (Including the case of a start quote without an end quote, which</SourceLine>
    <SourceLine>// could happen in the last field.)</SourceLine>
    <SourceLine>if removeQuotes then</SourceLine>
-   <SourceLine>for i As Integer = 0 to UBound( out )</SourceLine>
+   <SourceLine>for i As Integer = 0 to out.LastIndex</SourceLine>
    <SourceLine>Var s As String = out(i)</SourceLine>
-   <SourceLine>if s.LeftB( 1 ) = """" then</SourceLine>
-   <SourceLine>if s.RightB( 1 ) = """" then</SourceLine>
-   <SourceLine>out(i) = MidB( s, 2, s.LenB - 2 )</SourceLine>
+   <SourceLine>if s.LeftBytes( 1 ) = """" then</SourceLine>
+   <SourceLine>if s.RightBytes( 1 ) = """" then</SourceLine>
+   <SourceLine>out(i) = s.MiddleBytes( 1, s.LenB - 2 )</SourceLine>
    <SourceLine>else</SourceLine>
-   <SourceLine>out(i) = MidB( s, 2 )</SourceLine>
+   <SourceLine>out(i) = s.MiddleBytes( 1 )</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
@@ -2833,17 +2833,17 @@
    <SourceLine></SourceLine>
    <SourceLine>do</SourceLine>
    <SourceLine>// Find the next occurrence of the search string.  If none, then we're done.</SourceLine>
-   <SourceLine>Var foundPos As Integer = InStr( start, source, find )</SourceLine>
-   <SourceLine>if foundPos &lt; 1 then return foundPos</SourceLine>
+   <SourceLine>Var foundPos As Integer = source.IndexOf( start, find )</SourceLine>
+   <SourceLine>if foundPos = -1 then return foundPos</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Now, also find the next quotation mark; if this comes before</SourceLine>
    <SourceLine>// our foundPos, then we need to ignore that and resume searching</SourceLine>
    <SourceLine>// after the closing quote.  Otherwise, we're done.</SourceLine>
-   <SourceLine>Var quotePos As Integer = InStr( start, source, """" )</SourceLine>
-   <SourceLine>if quotePos = 0 or quotePos &gt; foundPos then return foundPos</SourceLine>
+   <SourceLine>Var quotePos As Integer = source.IndexOf( start, """" )</SourceLine>
+   <SourceLine>if quotePos = -1 or quotePos &gt; foundPos then return foundPos</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var closeQuotePos As Integer = InStr( quotePos+1, source, """" )</SourceLine>
-   <SourceLine>if closeQuotePos = 0 then return 0 // no closing quote, treat whole end of string as quoted</SourceLine>
+   <SourceLine>Var closeQuotePos As Integer = source.IndexOf(quotePos+1, """" )</SourceLine>
+   <SourceLine>if closeQuotePos = -1 then return -1 // no closing quote, treat whole end of string as quoted</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>start = closeQuotePos + 1</SourceLine>
    <SourceLine>loop</SourceLine>

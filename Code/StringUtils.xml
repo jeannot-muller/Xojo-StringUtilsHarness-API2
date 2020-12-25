@@ -826,13 +826,13 @@
    <SourceLine>// using the CDbl function.  This is appropriate for a set of numbers</SourceLine>
    <SourceLine>// entered or readable by the end-user.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var fields(-1) As String</SourceLine>
+   <SourceLine>Dim fields(-1) As String</SourceLine>
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var out(-1) As Double</SourceLine>
+   <SourceLine>Dim out(-1) As Double</SourceLine>
    <SourceLine>Redim out( UBound(fields) )</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var i As Integer</SourceLine>
+   <SourceLine>Dim i As Integer</SourceLine>
    <SourceLine>for i = UBound(fields) DownTo 0</SourceLine>
    <SourceLine>out(i) = CDbl( fields(i) )</SourceLine>
    <SourceLine>next</SourceLine>
@@ -2170,7 +2170,7 @@
    <SourceLine>// Return the decimal separator the user uses (either "." or ",").</SourceLine>
    <SourceLine>if mDecimalSeparator = "" then</SourceLine>
    <SourceLine>mDecimalSeparator = Format(1.2, "0.0")</SourceLine>
-   <SourceLine>mDecimalSeparator = mDecimalSeparator.middle( 2, 1 )</SourceLine>
+   <SourceLine>mDecimalSeparator = mDecimalSeparator.Middle(1, 1)</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>return mDecimalSeparator</SourceLine>

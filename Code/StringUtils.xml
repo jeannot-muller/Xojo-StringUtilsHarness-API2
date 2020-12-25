@@ -1953,7 +1953,7 @@
    <SourceLine>// Return true if 's' ends with the string 'withWhat',</SourceLine>
    <SourceLine>// doing a standard string comparison.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return Right(s, withWhat.Len) = withWhat</SourceLine>
+   <SourceLine>return s.right( withWhat.Length) = withWhat</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -1975,7 +1975,7 @@
    <SourceLine>// Return true if 's' ends with the string 'withWhat',</SourceLine>
    <SourceLine>// doing a binary comparison.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return StrComp( RightB(s, withWhat.LenB), withWhat, 0 ) = 0</SourceLine>
+   <SourceLine>return s.RightBytes( withWhat.Bytes).Compare( withWhat, ComparisonOptions.CaseSensitive ) = 0</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>

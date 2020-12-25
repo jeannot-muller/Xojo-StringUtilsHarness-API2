@@ -77,8 +77,8 @@
    <SourceLine>#pragma DisableBoundsChecking</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var n, m As Integer</SourceLine>
-   <SourceLine>n = s1.Len</SourceLine>
-   <SourceLine>m = s2.Len</SourceLine>
+   <SourceLine>n = s1.Length</SourceLine>
+   <SourceLine>m = s2.Length</SourceLine>
    <SourceLine>if n = 0 then return m</SourceLine>
    <SourceLine>if m = 0 then return n</SourceLine>
    <SourceLine></SourceLine>
@@ -90,8 +90,8 @@
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var s1chars(-1), s2chars(-1) As String</SourceLine>
-   <SourceLine>s1chars = Split( s1, "" )</SourceLine>
-   <SourceLine>s2chars = Split( s2, "" )</SourceLine>
+   <SourceLine>s1chars = s1.split( "" )</SourceLine>
+   <SourceLine>s2chars = s2.split( "" )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var s1char As String</SourceLine>
    <SourceLine>Var lastCost, nextCost As Integer</SourceLine>
@@ -103,7 +103,7 @@
    <SourceLine>lastCost = i</SourceLine>
    <SourceLine>jMinus1 = 0</SourceLine>
    <SourceLine>for j = 1 to m</SourceLine>
-   <SourceLine>if StrComp(s1char, s2chars(jMinus1),0) = 0 then cost = 0 else cost = 1</SourceLine>
+   <SourceLine>if s1char.compare(s2chars(jMinus1), ComparisonOptions.CaseSensitive ) = 0 then cost = 0 else cost = 1</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// set nextCost to the minimum of the following three possibilities:</SourceLine>
    <SourceLine>a = d(j) + 1</SourceLine>

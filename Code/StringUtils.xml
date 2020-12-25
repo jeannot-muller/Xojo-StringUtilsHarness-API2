@@ -2660,15 +2660,15 @@
    <SourceLine>//</SourceLine>
    <SourceLine>// For the inverse operation, see DecodeCase.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var chars() As String = Split( s, "" )</SourceLine>
+   <SourceLine>Var chars() As String = s.split( "" )</SourceLine>
    <SourceLine>Var inUpperState As Boolean = false</SourceLine>
    <SourceLine>Var idx As Integer</SourceLine>
    <SourceLine>Var anyUpper As Boolean</SourceLine>
-   <SourceLine>for idx = 0 to UBound( chars )</SourceLine>
+   <SourceLine>for idx = 0 to chars.LastIndex</SourceLine>
    <SourceLine>Var c As String = chars(idx)</SourceLine>
    <SourceLine>if c = "^" then</SourceLine>
    <SourceLine>// got a caret in the original string; double it</SourceLine>
-   <SourceLine>chars.Insert idx, "^"</SourceLine>
+   <SourceLine>chars.addAt( idx, "^")</SourceLine>
    <SourceLine>idx = idx + 1</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>// determine whether the given character fails to match the current state</SourceLine>
@@ -2680,7 +2680,7 @@
    <SourceLine>switchCase = (codepoint &gt;= 97 and codepoint &lt;= 122)</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>// if not ASCII, use RB's routines to see if it'd be any different in upper case</SourceLine>
-   <SourceLine>switchCase = StrComp( c, Uppercase(c), 0 ) &lt;&gt; 0</SourceLine>
+   <SourceLine>switchCase = c.compare( c.Uppercase, ComparisonOptions.CaseSensitive ) &lt;&gt; 0</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>if codepoint &lt; 128 then</SourceLine>
@@ -2688,21 +2688,21 @@
    <SourceLine>switchCase = (codepoint &gt;= 65 and codepoint &lt;= 90)</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>// if not ASCII, use RB's routines to see if it'd be any different in lower case</SourceLine>
-   <SourceLine>switchCase = StrComp( c, Lowercase(c), 0 ) &lt;&gt; 0</SourceLine>
+   <SourceLine>switchCase = c.compare(c.Lowercase, ComparisonOptions.CaseSensitive ) &lt;&gt; 0</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>if switchCase then anyUpper = true</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>if switchCase then</SourceLine>
    <SourceLine>// yep, time to switch case</SourceLine>
-   <SourceLine>chars.Insert idx, "^"</SourceLine>
+   <SourceLine>chars.addAt( idx, "^" )</SourceLine>
    <SourceLine>idx = idx + 1</SourceLine>
    <SourceLine>inUpperState = not inUpperState</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var result As String = Join( chars, "" )</SourceLine>
-   <SourceLine>if anyUpper then result = Lowercase( result )</SourceLine>
+   <SourceLine>Var result As String = string.FromArray( chars, "" )</SourceLine>
+   <SourceLine>if anyUpper then result = result.Lowercase</SourceLine>
    <SourceLine>return result</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>

@@ -2417,7 +2417,7 @@
    <SourceLine>Next</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var inData as MemoryBlock = new MemoryBlock(LenB(s))</SourceLine>
+   <SourceLine>Var inData as MemoryBlock = new MemoryBlock(s.Bytes)</SourceLine>
    <SourceLine>inData.StringValue(0, inData.Size) = s</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var outData as MemoryBlock = new MemoryBlock(3*inData.Size - 1)</SourceLine>

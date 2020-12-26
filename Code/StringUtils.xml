@@ -2492,6 +2492,9 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <NoteLine>Version History</NoteLine>
+   <NoteLine>2020-DEC-27: version 2.0</NoteLine>
+   <NoteLine>- First public release.</NoteLine>
+   <NoteLine>- Conversion to Xojo API2</NoteLine>
    <NoteLine></NoteLine>
    <NoteLine>2004-JUL-17: version 1.0</NoteLine>
    <NoteLine>- First public release.</NoteLine>

@@ -169,15 +169,16 @@
    <SourceLine>sLen = s.Length</SourceLine>
    <SourceLine>for i = 2 to sLen</SourceLine>
    <SourceLine>c = s.Middle(i-1, 1).Uppercase</SourceLine>
-   <SourceLine>if InStrB( "BPFV", c ) &gt; 0  then</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if str("BPFV").IndexOfBytes(c) &gt; -1  then</SourceLine>
    <SourceLine>curCode = 1</SourceLine>
-   <SourceLine>elseif InStrB( "CSKGJQXZ", c ) &gt; 0 then</SourceLine>
+   <SourceLine>elseif str("CSKGJQXZ").IndexOfBytes(c) &gt; -1 then</SourceLine>
    <SourceLine>curCode = 2</SourceLine>
-   <SourceLine>elseif InStrB( "DT", c ) &gt; 0 then</SourceLine>
+   <SourceLine>elseif str("DT").IndexOfBytes(c) &gt; -1 then</SourceLine>
    <SourceLine>curCode = 3</SourceLine>
    <SourceLine>elseif c = "L" then</SourceLine>
    <SourceLine>curCode = 4</SourceLine>
-   <SourceLine>elseif InStrB( "MN", c ) &gt; 0 then</SourceLine>
+   <SourceLine>elseif str("MN").IndexOfBytes(c) &gt; -1 then</SourceLine>
    <SourceLine>curCode = 5</SourceLine>
    <SourceLine>elseif c = "R" then</SourceLine>
    <SourceLine>curCode = 6</SourceLine>

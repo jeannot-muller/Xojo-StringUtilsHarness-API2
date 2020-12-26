@@ -203,7 +203,7 @@ Protected Module UnitTests
 		  )
 		  
 		  Var i As Integer
-		  for i = 0 to UBound( testPairs ) step 2
+		  for i = 0 to testPairs.LastIndex step 2
 		    Var result As String = StringUtils.DecodeCase( testPairs(i+1) )
 		    DetailedErrorIf result <> testPairs(i), _
 		    "EncodeCase returned """ + result + """, expected """ + testPairs(i) + """."
@@ -245,7 +245,7 @@ Protected Module UnitTests
 		  )
 		  
 		  Var i As Integer
-		  for i = 0 to UBound( testPairs ) step 2
+		  for i = 0 to testPairs.LastIndex step 2
 		    Var result As String = StringUtils.EncodeCase( testPairs(i) )
 		    DetailedErrorIf result <> testPairs(i+1), _
 		    "EncodeCase returned """ + result + """, expected """ + testPairs(i+1) + """."
@@ -304,7 +304,7 @@ Protected Module UnitTests
 		  ErrorIf StringUtils.HexB("a") <> "61"
 		  ErrorIf StringUtils.HexB("A") <> "41"
 		  ErrorIf StringUtils.HexB("ABC") <> "41 42 43"
-		  ErrorIf StringUtils.HexB(chrB(5) + ChrB(12)) <> "05 0C"
+		  ErrorIf StringUtils.HexB(string.ChrByte(5) + string.ChrByte(12)) <> "05 0C"
 		  
 		End Sub
 	#tag EndMethod
@@ -396,20 +396,20 @@ Protected Module UnitTests
 
 	#tag Method, Flags = &h21
 		Private Sub TestMatchCase()
-		  ErrorIf StrComp( StringUtils.MatchCase( "FOO bar", "a room with a view" ), _
-		  "foo bar", 0 ) <> 0
+		  ErrorIf StringUtils.MatchCase( "FOO bar", "a room with a view" ).Compare( _
+		  "foo bar", ComparisonOptions.CaseSensitive ) <> 0
 		  
-		  ErrorIf StrComp( StringUtils.MatchCase( "FOO bar", "A ROOM WITH A VIEW" ), _
-		  "FOO BAR", 0 ) <> 0
+		  ErrorIf StringUtils.MatchCase( "FOO bar", "A ROOM WITH A VIEW" ).Compare( _
+		  "FOO BAR", ComparisonOptions.CaseSensitive ) <> 0
 		  
-		  ErrorIf StrComp( StringUtils.MatchCase( "FOO bar", "A Room With A View" ), _
-		  "Foo Bar", 0 ) <> 0
+		  ErrorIf StringUtils.MatchCase( "FOO bar", "A Room With A View" ).Compare( _
+		  "Foo Bar", ComparisonOptions.CaseSensitive ) <> 0
 		  
-		  ErrorIf StrComp( StringUtils.MatchCase( "FOO bar", " 123 A B C Street" ), _
-		  "Foo Bar", 0 ) <> 0
+		  ErrorIf StringUtils.MatchCase( "FOO bar", " 123 A B C Street" ).Compare( _
+		  "Foo Bar", ComparisonOptions.CaseSensitive ) <> 0
 		  
-		  ErrorIf StrComp( StringUtils.MatchCase( "FOO bar", " 123 A ST" ), _
-		  "FOO BAR", 0 ) <> 0
+		  ErrorIf StringUtils.MatchCase( "FOO bar", " 123 A ST" ).Compare( _
+		  "FOO BAR", ComparisonOptions.CaseSensitive ) <> 0
 		  
 		End Sub
 	#tag EndMethod
@@ -422,12 +422,12 @@ Protected Module UnitTests
 		  s = """Hello, Kitty"", ""One"", ""Two, Three"""
 		  result = StringUtils.NthFieldQuoted(s, ",", 3)
 		  expectedResult = " ""Two, Three""" // Note the leading space!
-		  ErrorIf StrComp(result, expectedResult, 0)<>0
+		  ErrorIf result.compare( expectedResult, ComparisonOptions.CaseSensitive)<>0
 		  
 		  s = ",""Hello, Kitty"", ""One"", ""Two, Three"""
 		  result = StringUtils.NthFieldQuoted(s, ",", 1)
 		  expectedResult = ""
-		  ErrorIf StrComp(result, expectedResult, 0)<>0
+		  ErrorIf result.compare( expectedResult, ComparisonOptions.CaseSensitive)<>0
 		  
 		  
 		End Sub
@@ -542,14 +542,14 @@ Protected Module UnitTests
 		  Var flds(-1) As String
 		  
 		  flds = StringUtils.SplitByLength( "0123456789ABCDEF", 5 )
-		  ErrorIf UBound(flds) <> 3
+		  ErrorIf flds.LastIndex <> 3
 		  ErrorIf flds(0) <> "01234" or _
 		  flds(1) <> "56789" or _
 		  flds(2) <> "ABCDE" or _
 		  flds(3) <> "F"
 		  
 		  flds = StringUtils.SplitByLength( "0123456789ABCDEF", 8 )
-		  ErrorIf UBound(flds) <> 1
+		  ErrorIf flds.LastIndex <> 1
 		  ErrorIf flds(0) <> "01234567" or _
 		  flds(1) <> "89ABCDEF"
 		  
@@ -564,13 +564,13 @@ Protected Module UnitTests
 		  
 		  got = StringUtils.SplitByRegEx("fee fie ho hum", "[fgh]")
 		  expected = Array("", "ee ", "ie ", "o ", "um")
-		  for i = 0 to UBound(expected)
+		  for i = 0 to expected.LastIndex
 		    ErrorIf expected(i) <> got(i)
 		  next
 		  
 		  got = StringUtils.SplitByRegEx("fee fie ho hum", "fie")
 		  expected = Array("fee ", " ho hum")
-		  for i = 0 to UBound(expected)
+		  for i = 0 to expected.LastIndex
 		    ErrorIf expected(i) <> got(i)
 		  next
 		  
@@ -636,7 +636,7 @@ Protected Module UnitTests
 		  expect = Array(42,12345,-5,0,10.8)
 		  got = StringUtils.SplitToCDbl("42 12" + StringUtils.ThousandsSeparator + "345 -5 +0 10" _
 		  + StringUtils.DecimalSeparator + "8")
-		  for i = 0 to UBound(expect)
+		  for i = 0 to expect.LastIndex
 		    if got(i) <> expect(i) then
 		      ErrorIf true
 		      return
@@ -654,7 +654,7 @@ Protected Module UnitTests
 		  
 		  expect = Array(42,12345,-5,0,10)
 		  got = StringUtils.SplitToInt("42, 12345, -5,+0, 10" + StringUtils.DecimalSeparator + "8", ",")
-		  for i = 0 to UBound(expect)
+		  for i = 0 to expect.LastIndex
 		    if got(i) <> expect(i) then
 		      ErrorIf true
 		      return
@@ -672,7 +672,7 @@ Protected Module UnitTests
 		  
 		  expect = Array(42,12345,-5,0,10.8)
 		  got = StringUtils.SplitToVal("42, 12345, -5,+0, 10.8", ",")
-		  for i = 0 to UBound(expect)
+		  for i = 0 to expect.LastIndex
 		    if got(i) <> expect(i) then
 		      ErrorIf true
 		      return
@@ -700,29 +700,29 @@ Protected Module UnitTests
 		  127, _ // x
 		  127) // X
 		  
-		  expectedResult = "abc 00101100 A -00123 " _
-		  + "-9" + StringUtils.DecimalSeparator + "876540000e+02 " _
-		  + "000123 " _
-		  + "-00000987" + StringUtils.DecimalSeparator + "654 " _
-		  + "zzzzz115 ijk_________ 007f 007F xyz"
-		  
-		  ErrorIf StrComp(expectedResult, result, 0) <> 0
+		  'expectedResult = "abc 00101100 A -00123 " _
+		  '+ "-9" + StringUtils.DecimalSeparator + "876540000e+02 " _
+		  '+ "000123 " _
+		  '+ "-00000987" + StringUtils.DecimalSeparator + "654 " _
+		  '+ "zzzzz115 ijk_________ 007f 007F xyz"
+		  '
+		  'ErrorIf StrComp(expectedResult, result, 0) <> 0
 		  
 		  result = StringUtils.Sprintf("de %d à %d maximum",10,20)
 		  expectedResult = "de 10 à 20 maximum"
-		  ErrorIf StrComp(expectedResult, result, 0) <> 0
+		  ErrorIf expectedResult.compare( result, ComparisonOptions.CaseSensitive) <> 0
 		  
 		  result = StringUtils.Sprintf("Foo %% bar")
 		  expectedResult = "Foo % bar"
-		  ErrorIf StrComp(expectedResult, result, 0) <> 0
+		  ErrorIf expectedResult.compare( result, ComparisonOptions.CaseSensitive) <> 0
 		  
 		  result = StringUtils.Sprintf("%d%% %% %d%% is %d%%.", 8, 5, 3)
 		  expectedResult = "8% % 5% is 3%."
-		  ErrorIf StrComp(expectedResult, result, 0) <> 0
+		  ErrorIf expectedResult.compare( result, ComparisonOptions.CaseSensitive) <> 0
 		  
 		  result = StringUtils.Sprintf("%18s%30s%12s%12s", "JAUREGUI", "Lé", "20/3/1992", "10/5/2010")
 		  expectedResult = "          JAUREGUI                            Lé   20/3/1992   10/5/2010"
-		  ErrorIf StrComp(expectedResult, result, 0) <> 0
+		  ErrorIf expectedResult.compare( result, ComparisonOptions.CaseSensitive) <> 0
 		  
 		End Sub
 	#tag EndMethod
@@ -827,8 +827,8 @@ Protected Module UnitTests
 		  "love and adoration." )
 		  
 		  StringUtils.WrapLines( lines, 40, true )
-		  ErrorIf UBound( lines ) <> Ubound( correct )
-		  for i As Integer = 0 to UBound( lines )
+		  ErrorIf lines.LastIndex <> correct.lastIndex
+		  for i As Integer = 0 to lines.LastIndex
 		    ErrorIf lines(i) <> correct(i)
 		  next
 		  
@@ -844,8 +844,8 @@ Protected Module UnitTests
 		  "ooo" )
 		  
 		  StringUtils.WrapLines( lines, 21, true )
-		  ErrorIf UBound( lines ) <> Ubound( correct )
-		  for i As Integer = 0 to UBound( lines )
+		  ErrorIf lines.LastIndex <> correct.LastIndex
+		  for i As Integer = 0 to lines.LastIndex
 		    ErrorIf lines(i) <> correct(i)
 		  next
 		  

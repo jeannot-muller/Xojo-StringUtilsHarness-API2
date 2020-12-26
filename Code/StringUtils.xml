@@ -150,26 +150,26 @@
    <SourceLine>Dim prefix, prefixes(-1) As String</SourceLine>
    <SourceLine>Dim i, prefixLen As Integer</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>s = Trim( s )</SourceLine>
+   <SourceLine>s = s.trim</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>if stripPrefix then</SourceLine>
    <SourceLine>prefixes = Array("La ", "De ", "Van ")  // more to come?</SourceLine>
    <SourceLine>for each prefix in prefixes</SourceLine>
-   <SourceLine>prefixLen = prefix.Len</SourceLine>
-   <SourceLine>if Left( s, prefixLen ) = prefix then</SourceLine>
-   <SourceLine>s = Mid( s, prefixLen+1 )</SourceLine>
+   <SourceLine>prefixLen = prefix.Length</SourceLine>
+   <SourceLine>if s.left( prefixLen ) = prefix then</SourceLine>
+   <SourceLine>s = s.Middle(prefixLen)</SourceLine>
    <SourceLine>exit</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Dim c, out As String</SourceLine>
-   <SourceLine>out = Uppercase( Left(s, 1) )</SourceLine>
+   <SourceLine>out = s.left(1).Uppercase</SourceLine>
    <SourceLine>Dim sLen, curCode, lastCode As Integer</SourceLine>
-   <SourceLine>sLen = s.Len</SourceLine>
+   <SourceLine>sLen = s.Length</SourceLine>
    <SourceLine>for i = 2 to sLen</SourceLine>
-   <SourceLine>c = Uppercase( Mid( s, i, 1 ) )</SourceLine>
-   <SourceLine>if InStrB( "BPFV", c ) &gt; 0 then</SourceLine>
+   <SourceLine>c = s.Middle(i-1, 1).Uppercase</SourceLine>
+   <SourceLine>if InStrB( "BPFV", c ) &gt; 0  then</SourceLine>
    <SourceLine>curCode = 1</SourceLine>
    <SourceLine>elseif InStrB( "CSKGJQXZ", c ) &gt; 0 then</SourceLine>
    <SourceLine>curCode = 2</SourceLine>
@@ -186,11 +186,10 @@
    <SourceLine>end if</SourceLine>
    <SourceLine>if curCode &gt; 0 and curCode &lt;&gt; lastCode then</SourceLine>
    <SourceLine>out = out + str(curCode)</SourceLine>
-   <SourceLine>if Len(out) = 4 then return out</SourceLine>
+   <SourceLine>if out.length = 4 then return out</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
-   <SourceLine></SourceLine>
-   <SourceLine>return Left( out + "000", 4 )</SourceLine>
+   <SourceLine>return str(out + "000").Left(4)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -316,13 +315,12 @@
    <SourceLine>if length &gt;= width then return s</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var mostToRepeat as Integer</SourceLine>
-   <SourceLine>mostToRepeat = ceil((width-length)/padding.Length)</SourceLine>
+   <SourceLine>mostToRepeat = ceiling((width-length)/padding.Length)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var repeated as String</SourceLine>
    <SourceLine>repeated = Repeat(padding, ceiling(mostToRepeat/2))</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return mid(repeated, 1, ceiling((width-length)/2)) + s + mid(repeated,1,(width-length)\2)</SourceLine>
-   <SourceLine></SourceLine>
+   <SourceLine>return repeated.middle(0, ceiling((width-length)/2)) + s + repeated.middle(0,(width-length)\2)</SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
   <TextEncoding>134217984</TextEncoding>
@@ -406,13 +404,13 @@
    <SourceLine>#pragma NilObjectChecking false</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>if src.indexOf( sep ) = -1 then return 0</SourceLine>
-   <SourceLine>if src.indexOf("""")= -1 then return CountFields(src, sep)</SourceLine>
+   <SourceLine>if src.indexOf("""")= -1 then return src.CountFields( sep)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var countParts, i, n, c as integer</SourceLine>
    <SourceLine>Var sepLen as integer = sep.length</SourceLine>
    <SourceLine>Var parts( -1 ) as string</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>parts = split( src, """" )</SourceLine>
+   <SourceLine>parts = src.split( """" )</SourceLine>
    <SourceLine>countParts = parts.LastIndex</SourceLine>
    <SourceLine>for i = 0 to countParts step 2</SourceLine>
    <SourceLine>n = parts( i ).indexOf( sep )</SourceLine>
@@ -448,14 +446,15 @@
    <SourceLine>// result: s1 = "Two, Three" (including the quotes!)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Easy cases: no occurrences of the separator, or no quotation marks</SourceLine>
-   <SourceLine>if InStr(src,sep)=0 then</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if src.IndexOf(sep)=-1 then</SourceLine>
    <SourceLine>if index=1 then</SourceLine>
    <SourceLine>return src</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>return ""</SourceLine>
    <SourceLine>end if</SourceLine>
-   <SourceLine>elseif InStr(src,"""")= 0 then</SourceLine>
-   <SourceLine>return NthField(src, sep, index)</SourceLine>
+   <SourceLine>elseif src.IndexOf("""")= -1 then</SourceLine>
+   <SourceLine>return src.NthField( sep, index)</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Harder case: both separator and quotation marks.</SourceLine>
@@ -598,7 +597,7 @@
    <SourceLine>// Return true if 's' starts with the string 'withWhat',</SourceLine>
    <SourceLine>// doing a standard string comparison.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return Left(s, withWhat.Len) = withWhat</SourceLine>
+   <SourceLine>return s.left( withWhat.Length) = withWhat</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -644,7 +643,7 @@
    <SourceLine>// Return true if 's' starts with the string 'withWhat',</SourceLine>
    <SourceLine>// doing a binary comparison.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>return StrComp( LeftB(s, withWhat.Len), withWhat, 0 ) = 0</SourceLine>
+   <SourceLine>return s.LeftBytes(withWhat.Length).Compare( withWhat, ComparisonOptions.CaseSensitive ) = 0</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -761,10 +760,10 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Integer</SourceLine>
-   <SourceLine>Redim out( UBound(fields) )</SourceLine>
+   <SourceLine>Redim out( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
-   <SourceLine>for i = UBound(fields) DownTo 0</SourceLine>
+   <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
    <SourceLine>out(i) = Val( fields(i) )</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -796,10 +795,10 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Double</SourceLine>
-   <SourceLine>Redim out( UBound(fields) )</SourceLine>
+   <SourceLine>Redim out( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
-   <SourceLine>for i = UBound(fields) DownTo 0</SourceLine>
+   <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
    <SourceLine>out(i) = Val( fields(i) )</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -830,10 +829,10 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Dim out(-1) As Double</SourceLine>
-   <SourceLine>Redim out( UBound(fields) )</SourceLine>
+   <SourceLine>Redim out( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Dim i As Integer</SourceLine>
-   <SourceLine>for i = UBound(fields) DownTo 0</SourceLine>
+   <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
    <SourceLine>out(i) = CDbl( fields(i) )</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -868,13 +867,13 @@
    <SourceLine>rm = re.Search( source )</SourceLine>
    <SourceLine>while rm &lt;&gt; nil</SourceLine>
    <SourceLine>'System.DebugLog rm.SubExpressionString(0) + " at " + str(rm.SubExpressionStartB(0)) + " matches " + pattern + " in " + s</SourceLine>
-   <SourceLine>out.Append MidB( source, startPos + 1, rm.SubExpressionStartB(0) - startPos )</SourceLine>
+   <SourceLine>out.Add( source.MiddleBytes( startPos, rm.SubExpressionStartB(0) - startPos ) )</SourceLine>
    <SourceLine>startPos = re.SearchStartPosition</SourceLine>
    <SourceLine>rm = re.Search</SourceLine>
    <SourceLine>wend</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if startPos &lt; source.LenB then</SourceLine>
-   <SourceLine>out.Append MidB( source, startPos + 1 )</SourceLine>
+   <SourceLine>if startPos &lt; source.Bytes then</SourceLine>
+   <SourceLine>out.Add source.MiddleBytes( startPos )</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>return out</SourceLine>
@@ -899,7 +898,7 @@
    <SourceLine>// Return a version of s ready for use in an SQL statement.</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// In other words, we just need to double the apostrophes:</SourceLine>
-   <SourceLine>return ReplaceAll( s, "'", "''" )</SourceLine>
+   <SourceLine>return s.ReplaceAll( "'", "''" )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End Function</SourceLine>
   </ItemSource>
@@ -971,17 +970,17 @@
    <SourceLine>// case-sensitive squeezing, use SqueezeB.</SourceLine>
    <SourceLine>// Example: Squeeze("woOow mAAAn", "aeiou") = "wow man".</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var sLenB As Integer = s.LenB</SourceLine>
+   <SourceLine>Var sLenB As Integer = s.Bytes</SourceLine>
    <SourceLine>if sLenB &lt; 2 then return s</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>#pragma BackgroundTasks False</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>charSet = ConvertEncoding( charSet, s.Encoding )</SourceLine>
-   <SourceLine>for each char as String in Split( charSet, "" )</SourceLine>
+   <SourceLine>for each char as String in charSet.Split( "" )</SourceLine>
    <SourceLine>Var doubleChar As String = char + char</SourceLine>
    <SourceLine>do</SourceLine>
    <SourceLine>s = ReplaceAll( s, doubleChar, char )</SourceLine>
-   <SourceLine>Var newLenB As Integer = s.LenB</SourceLine>
+   <SourceLine>Var newLenB As Integer = s.Bytes</SourceLine>
    <SourceLine>if newLenB = sLenB then exit</SourceLine>
    <SourceLine>sLenB = newLenB</SourceLine>
    <SourceLine>loop</SourceLine>
@@ -1096,7 +1095,7 @@
    <SourceLine>// multi-byte characters, you should probably be using</SourceLine>
    <SourceLine>// Reverse instead of ReverseB.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if LenB(s) &lt; 2 then return s</SourceLine>
+   <SourceLine>if s.Bytes &lt; 2 then return s</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>#pragma BackgroundTasks False</SourceLine>
    <SourceLine>Var m as MemoryBlock = s</SourceLine>
@@ -1217,18 +1216,19 @@
    <SourceLine></SourceLine>
    <SourceLine>do until match = nil</SourceLine>
    <SourceLine>if match.SubExpressionCount = 7 then</SourceLine>
-   <SourceLine>padding = Right(" " + match.SubExpressionString(2), 1)</SourceLine>
+   <SourceLine>Var interim as string = " " + match.SubExpressionString(2)</SourceLine>
+   <SourceLine>padding = interim.Right(1)</SourceLine>
    <SourceLine>// if padding = "" then padding = " " // default: space</SourceLine>
    <SourceLine>alignment = match.SubExpressionString(3)</SourceLine>
    <SourceLine>width = Val(match.SubExpressionString(4))</SourceLine>
-   <SourceLine>precstr = Mid(match.SubExpressionString(5), 2)</SourceLine>
+   <SourceLine>precstr = match.SubExpressionString(5).middle( 2)</SourceLine>
    <SourceLine>precision = Val(precstr)</SourceLine>
    <SourceLine>if precstr="" then precision = 6</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>argtype = match.SubExpressionString(6)</SourceLine>
    <SourceLine>if argtype &lt;&gt; "%" then</SourceLine>
    <SourceLine>index = index + 1</SourceLine>
-   <SourceLine>if index &gt; UBound(data) then</SourceLine>
+   <SourceLine>if index &gt; data.LastIndex then</SourceLine>
    <SourceLine>datum = 0</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>datum = data(index)</SourceLine>
@@ -1249,7 +1249,7 @@
    <SourceLine>case "d" // signed int</SourceLine>
    <SourceLine>if padding = "0" then</SourceLine>
    <SourceLine>frmstr = "-"+Repeat("0", width)</SourceLine>
-   <SourceLine>if datum&lt;0 then frmstr = Left(frmstr, Len(frmstr)-1)</SourceLine>
+   <SourceLine>if datum&lt;0 then frmstr = frmstr.Left( frmstr.Length-1) </SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>frmstr = "-#"</SourceLine>
    <SourceLine>end if</SourceLine>
@@ -1259,9 +1259,9 @@
    <SourceLine>vf = datum</SourceLine>
    <SourceLine>frmstr = "-#."+Repeat("0", precision)+"e+"</SourceLine>
    <SourceLine>Replacement = Format(vf, frmstr)</SourceLine>
-   <SourceLine>p = InStr(Replacement, "e")</SourceLine>
+   <SourceLine>p = Replacement.IndexOf("e")</SourceLine>
    <SourceLine>// Make sure the part after the "e" has two digits</SourceLine>
-   <SourceLine>Replacement = Left(Replacement, p)+Format(Val(Mid(Replacement, p+1)), "+00")</SourceLine>
+   <SourceLine>Replacement = Replacement.left(p) + Format(Val(Replacement.middle( p+1)), "+00")</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>case "u" // unsigned int</SourceLine>
    <SourceLine>replacement = Format(datum, "#")</SourceLine>
@@ -1269,7 +1269,7 @@
    <SourceLine>case "f" // signed float</SourceLine>
    <SourceLine>if padding = "0" then</SourceLine>
    <SourceLine>frmstr = "-"+Repeat("0", width)</SourceLine>
-   <SourceLine>if datum&lt;0 then frmstr = Left(frmstr, Len(frmstr)-1)</SourceLine>
+   <SourceLine>if datum&lt;0 then frmstr = frmstr.left( frmstr.length-1)</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>frmstr = "-#"</SourceLine>
    <SourceLine>end if</SourceLine>
@@ -1288,27 +1288,27 @@
    <SourceLine>case "x" // hex int; uppercase "X" means uppercase hex, "x" is lowercase hex</SourceLine>
    <SourceLine>replacement = hex(datum)</SourceLine>
    <SourceLine>if asc(argtype) = &amp;h58 then // uppercase "X"</SourceLine>
-   <SourceLine>replacement = Uppercase(replacement)</SourceLine>
+   <SourceLine>replacement = replacement.Uppercase</SourceLine>
    <SourceLine>else // lowercase "x"</SourceLine>
-   <SourceLine>replacement = lowercase(replacement)</SourceLine>
+   <SourceLine>replacement = replacement.Lowercase</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>end select</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if width&gt;Len(replacement) then</SourceLine>
+   <SourceLine>if width&gt;replacement.Length then</SourceLine>
    <SourceLine>if alignment="-" then // align left</SourceLine>
-   <SourceLine>replacement=replacement+Repeat(padding, width-Len(replacement))</SourceLine>
+   <SourceLine>replacement=replacement+Repeat(padding, width-replacement.length)</SourceLine>
    <SourceLine>else // align right</SourceLine>
-   <SourceLine>replacement=Repeat(padding, width-Len(replacement))+replacement</SourceLine>
+   <SourceLine>replacement=Repeat(padding, width-replacement.length)+replacement</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>end if</SourceLine>
-   <SourceLine>start = match.SubExpressionStartB(0)+1</SourceLine>
-   <SourceLine>length = LenB(match.SubExpressionString(0))</SourceLine>
+   <SourceLine>start = match.SubExpressionStartB(0)</SourceLine>
+   <SourceLine>length = match.SubExpressionString(0).Bytes</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>s = LeftB(src, start-1) + replacement</SourceLine>
-   <SourceLine>src = s + MidB(src, start+length)</SourceLine>
+   <SourceLine>s = src.LeftBytes( start) + replacement</SourceLine>
+   <SourceLine>src = s + src.MiddleBytes(start+length)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>match = rex.Search(src, LenB(s))</SourceLine>
+   <SourceLine>match = rex.Search(src, s.Bytes)</SourceLine>
    <SourceLine>loop</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>return src</SourceLine>
@@ -1333,7 +1333,7 @@
    <SourceLine>// Return the thousands separator the user uses (either "." or ",").</SourceLine>
    <SourceLine>if mThousandsSeparator = "" then</SourceLine>
    <SourceLine>mThousandsSeparator = Format(1000, "#,#")</SourceLine>
-   <SourceLine>mThousandsSeparator = Mid( mThousandsSeparator, 2, 1 )</SourceLine>
+   <SourceLine>mThousandsSeparator = mThousandsSeparator.Middle( 1, 1 )</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>return mThousandsSeparator</SourceLine>
@@ -1390,13 +1390,13 @@
    <SourceLine>Var out(-1) As String</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var qty As Integer</SourceLine>
-   <SourceLine>qty = Ceil( Len(s) / fieldWidth )</SourceLine>
+   <SourceLine>qty = Ceiling( s.Length / fieldWidth )</SourceLine>
    <SourceLine>Redim out( qty - 1 )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var pos, i As Integer</SourceLine>
-   <SourceLine>pos = 1</SourceLine>
+   <SourceLine>pos = 0</SourceLine>
    <SourceLine>for i = 0 to qty-1</SourceLine>
-   <SourceLine>out(i) = Mid( s, pos, fieldWidth )</SourceLine>
+   <SourceLine>out(i) = s.Middle( pos, fieldWidth )</SourceLine>
    <SourceLine>pos = pos + fieldWidth</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -1465,13 +1465,13 @@
    <SourceLine>Var out(-1) As String</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var qty As Integer</SourceLine>
-   <SourceLine>qty = Ceil( LenB(s) / fieldWidth )</SourceLine>
+   <SourceLine>qty = Ceiling( s.Bytes / fieldWidth )</SourceLine>
    <SourceLine>Redim out( qty - 1 )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var pos, i As Integer</SourceLine>
-   <SourceLine>pos = 1</SourceLine>
+   <SourceLine>pos = 0</SourceLine>
    <SourceLine>for i = 0 to qty-1</SourceLine>
-   <SourceLine>out(i) = MidB( s, pos, fieldWidth )</SourceLine>
+   <SourceLine>out(i) = s.MiddleBytes( pos, fieldWidth )</SourceLine>
    <SourceLine>pos = pos + fieldWidth</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -1760,7 +1760,7 @@
    <SourceLine>Var s As String = out(i)</SourceLine>
    <SourceLine>if s.LeftBytes( 1 ) = """" then</SourceLine>
    <SourceLine>if s.RightBytes( 1 ) = """" then</SourceLine>
-   <SourceLine>out(i) = s.MiddleBytes( 1, s.LenB - 2 )</SourceLine>
+   <SourceLine>out(i) = s.MiddleBytes( 1, s.Bytes - 2 )</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>out(i) = s.MiddleBytes( 1 )</SourceLine>
    <SourceLine>end if</SourceLine>
@@ -2074,7 +2074,7 @@
    <SourceLine>// Chops 'stringToCut' off of s, if stringToCut is found at the end.</SourceLine>
    <SourceLine>// Useful for removing file extensions, trailing punctuation, etc.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var cutLenB As Integer = stringToCut.LenB</SourceLine>
+   <SourceLine>Var cutLenB As Integer = stringToCut.Bytes</SourceLine>
    <SourceLine>if s.rightBytes(cutLenB).Compare(stringToCut, ComparisonOptions.CaseSensitive ) = 0 then</SourceLine>
    <SourceLine>return s.LeftBytes( s.Bytes - cutLenB )</SourceLine>
    <SourceLine>else</SourceLine>
@@ -2104,17 +2104,17 @@
    <SourceLine>// charSet into the encoding of s, so you don't have to worry about that.</SourceLine>
    <SourceLine>// Example: Squeeze("wooow maaan", "aeiou") = "wow man".</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Var sLenB As Integer = s.LenB</SourceLine>
+   <SourceLine>Var sLenB As Integer = s.Bytes</SourceLine>
    <SourceLine>if sLenB &lt; 2 then return s</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>#pragma BackgroundTasks False</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>charSet = ConvertEncoding( charSet, s.Encoding )</SourceLine>
-   <SourceLine>for each char as String in Split( charSet, "" )</SourceLine>
+   <SourceLine>for each char as String in charSet.Split( "" )</SourceLine>
    <SourceLine>Var doubleChar As String = char + char</SourceLine>
    <SourceLine>do</SourceLine>
-   <SourceLine>s = ReplaceAllB( s, doubleChar, char )</SourceLine>
-   <SourceLine>Var newLenB As Integer = s.LenB</SourceLine>
+   <SourceLine>s = s.ReplaceAllBytes( doubleChar, char )</SourceLine>
+   <SourceLine>Var newLenB As Integer = s.Bytes</SourceLine>
    <SourceLine>if newLenB = sLenB then exit</SourceLine>
    <SourceLine>sLenB = newLenB</SourceLine>
    <SourceLine>loop</SourceLine>
@@ -2143,15 +2143,15 @@
    <SourceLine>// is true, then whenever one long line is followed by a line that does not</SourceLine>
    <SourceLine>// start with whitespace, join them together into one continuous paragraph.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if UBound( lines ) &lt; 0 then return</SourceLine>
+   <SourceLine>if lines.LastIndex = -1 then return</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Start by joining lines, if called for.</SourceLine>
    <SourceLine>if paragraphFill then</SourceLine>
    <SourceLine>Var lineNum As Integer = 1</SourceLine>
-   <SourceLine>Var lastLineShort As Boolean = ( lines(0).Len &lt; charsPerLine-20 )</SourceLine>
-   <SourceLine>while lineNum &lt;= UBound( lines )</SourceLine>
+   <SourceLine>Var lastLineShort As Boolean = ( lines(0).Length &lt; charsPerLine-20 )</SourceLine>
+   <SourceLine>while lineNum &lt;= lines.LastIndex</SourceLine>
    <SourceLine>Var line As String = lines( lineNum )</SourceLine>
-   <SourceLine>Var firstChar As String = Left( line, 1 )</SourceLine>
+   <SourceLine>Var firstChar As String = line.left( 1 )</SourceLine>
    <SourceLine>if lastLineShort then</SourceLine>
    <SourceLine>// last line was short, so don't join this one to it</SourceLine>
    <SourceLine>lineNum = lineNum + 1</SourceLine>
@@ -2161,29 +2161,28 @@
    <SourceLine>else</SourceLine>
    <SourceLine>// this line starts with a character; join it to the previous line</SourceLine>
    <SourceLine>lines( lineNum - 1 ) = lines( lineNum - 1 ) + " " + line</SourceLine>
-   <SourceLine>lines.Remove lineNum</SourceLine>
+   <SourceLine>lines.RemoveAt( lineNum )</SourceLine>
    <SourceLine>end if</SourceLine>
-   <SourceLine>lastLineShort = ( line.Len &lt; charsPerLine-20 )</SourceLine>
+   <SourceLine>lastLineShort = ( line.Length &lt; charsPerLine-20 )</SourceLine>
    <SourceLine>wend</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Then, go through and do the wrapping.</SourceLine>
-   <SourceLine>for lineNum As Integer = 0 to UBound( lines )</SourceLine>
-   <SourceLine>Var line As String = RTrim( lines( lineNum ) )</SourceLine>
-   <SourceLine>if line.Len &lt;= charsPerLine then</SourceLine>
+   <SourceLine>for lineNum As Integer = 0 to lines.LastIndex</SourceLine>
+   <SourceLine>Var line As String = lines( lineNum ).TrimRight </SourceLine>
+   <SourceLine>if line.Length &lt;= charsPerLine then</SourceLine>
    <SourceLine>lines( lineNum ) = line</SourceLine>
    <SourceLine>else</SourceLine>
-   <SourceLine>Var breakPos As Integer</SourceLine>
+   <SourceLine>Dim breakPos As Integer</SourceLine>
    <SourceLine>for breakPos = charsPerLine DownTo 1</SourceLine>
-   <SourceLine>Var c As String = Mid( line, breakPos, 1 )</SourceLine>
+   <SourceLine>Var c As String = line.middle( breakPos-1, 1 )</SourceLine>
    <SourceLine>if c &lt;= " " or c = "-" then exit</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine>if breakPos &lt; 2 then breakPos = charsPerLine + 1  // no point breaking before char 1</SourceLine>
-   <SourceLine>lines.Insert lineNum + 1, LTrim( Mid( line, breakPos ) )</SourceLine>
-   <SourceLine>lines( lineNum ) = LTrim( Left( line, breakPos - 1) )</SourceLine>
+   <SourceLine>lines.AddAt( lineNum + 1, line.Middle(breakPos-1).TrimLeft )</SourceLine>
+   <SourceLine>lines( lineNum ) = line.left(breakPos - 1).TrimLeft</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
-   <SourceLine></SourceLine>
    <SourceLine>End Sub</SourceLine>
   </ItemSource>
   <TextEncoding>134217984</TextEncoding>
@@ -2453,8 +2452,9 @@
    <NoteLine>Ben Blake, benb@kagi.com</NoteLine>
    <NoteLine>Cortis Clark, cortis@realsoftware.com</NoteLine>
    <NoteLine>Carlos Martinho, rblists@rbtips.com</NoteLine>
+   <NoteLine>Jeannot Muller, dr@jeannot-muller.com (*)</NoteLine>
    <NoteLine>Jon Johnson, jonj@realsoftware.com</NoteLine>
-   <NoteLine>Joe Strout, joe@strout.net (*)</NoteLine>
+   <NoteLine>Joe Strout, joe@strout.net </NoteLine>
    <NoteLine>Florent Pillet, florent@florentpillet.com</NoteLine>
    <NoteLine>Kem Tekinay, ktekinay@mactechnologies.com</NoteLine>
    <NoteLine>Charles Yeomans, yeomans@desuetude.com</NoteLine>

@@ -62,7 +62,6 @@ Protected Module UnitTests
 		  TestJoinQuoted
 		  TestLineEnding
 		  TestMatchCase
-		  TestMetaphone
 		  TestNthFieldQuoted
 		  TestPadBoth
 		  TestPadLeft
@@ -416,95 +415,6 @@ Protected Module UnitTests
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, CompatibilityFlags = TargetHasGUI
-		Private Sub TestMetaphone()
-		  Var primary, alternate As string
-		  
-		  StringUtils.Metaphone("", primary, alternate)
-		  ErrorIf primary <> "" or alternate <> ""
-		  
-		  StringUtils.Metaphone("   ", primary, alternate)
-		  ErrorIf primary <> "" or alternate <> ""
-		  
-		  StringUtils.Metaphone("Xavier", primary, alternate)
-		  ErrorIf primary <> "SF" or alternate <> "SFR"
-		  
-		  StringUtils.Metaphone("Dumb", primary, alternate)
-		  ErrorIf primary <> "TM" or alternate <> "TM"
-		  
-		  StringUtils.Metaphone("Bambi", primary, alternate)
-		  ErrorIf primary <> "PMP" or alternate <> "PMP"
-		  
-		  StringUtils.Metaphone("Church", primary, alternate)
-		  ErrorIf primary <> "XRX" or alternate <> "XRK"
-		  
-		  StringUtils.Metaphone("Mac Gregor", primary, alternate)
-		  ErrorIf primary <> "MKRKR" or alternate <> "MKRKR"
-		  
-		  StringUtils.Metaphone("Caesar", primary, alternate)
-		  ErrorIf primary <> "SSR" or alternate <> "SSR"
-		  
-		  StringUtils.Metaphone("Succeed", primary, alternate)
-		  ErrorIf primary <> "SKST" or alternate <> "SKST"
-		  
-		  StringUtils.Metaphone("Checker", primary, alternate)
-		  ErrorIf primary <> "XKR" or alternate <> "XKR"
-		  
-		  StringUtils.Metaphone("School", primary, alternate)
-		  ErrorIf primary <> "SKL" or alternate <> "SKL"
-		  
-		  StringUtils.Metaphone("Shrink", primary, alternate)
-		  ErrorIf primary <> "XRNK" or alternate <> "XRNK"
-		  
-		  StringUtils.Metaphone("Bumpkin", primary, alternate)
-		  ErrorIf primary <> "PMPKN" or alternate <> "PMPKN"
-		  
-		  StringUtils.Metaphone("Adams", primary, alternate)
-		  ErrorIf primary <> "ATMS" or alternate <> "ATMS"
-		  
-		  StringUtils.Metaphone("Albright", primary, alternate)
-		  ErrorIf primary <> "ALPRT" or alternate <> "ALPRT"
-		  
-		  StringUtils.Metaphone("Howey", primary, alternate)
-		  ErrorIf primary <> "H" or alternate <> "H"
-		  
-		  StringUtils.Metaphone("Jose", primary, alternate)
-		  ErrorIf primary <> "JS" or alternate <> "HS"
-		  
-		  StringUtils.Metaphone("Cappuccino", primary, alternate)
-		  ErrorIf primary <> "KPXN" or alternate <> "KPXN"
-		  
-		  StringUtils.Metaphone("Axel", primary, alternate)
-		  ErrorIf primary <> "AKSL" or alternate <> "AKSL"
-		  
-		  StringUtils.Metaphone("Paris", primary, alternate)
-		  ErrorIf primary <> "PRS" or alternate <> "PRS"
-		  
-		  StringUtils.Metaphone("Computer", primary, alternate)
-		  ErrorIf primary <> "KMPTR" or alternate <> "KMPTR"
-		  
-		  StringUtils.Metaphone("Stephen", primary, alternate)
-		  ErrorIf primary <> "STFN" or alternate <> "STFN"
-		  
-		  StringUtils.Metaphone("Steven", primary, alternate)
-		  ErrorIf primary <> "STFN" or alternate <> "STFN"
-		  
-		  StringUtils.Metaphone("Thomas", primary, alternate)
-		  ErrorIf primary <> "TMS" or alternate <> "TMS"
-		  
-		  StringUtils.Metaphone("Karmilowicz", primary, alternate)
-		  ErrorIf primary <> "KRMLTS" or alternate <> "KRMLFX"
-		  
-		  StringUtils.Metaphone("Breaux", primary, alternate)
-		  ErrorIf primary <> "PR" or alternate <> "PR"
-		  
-		  StringUtils.Metaphone("Zhao", primary, alternate)
-		  ErrorIf primary <> "J" or alternate <> "J"
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21, CompatibilityFlags = TargetHasGUI
 		Private Sub TestNthFieldQuoted()
 		  Var s as string
 		  Var result, expectedResult as string
@@ -557,12 +467,9 @@ Protected Module UnitTests
 	#tag Method, Flags = &h21
 		Private Sub TestRandom()
 		  Var result As String = StringUtils.Random( 8, "abcde" )
-		  UnitTests.ErrorIf result.Len <> 8
+		  UnitTests.ErrorIf result.Length <> 8
 		  UnitTests.ErrorIf result.Encoding <> Encoding( "abcde" )
-		  for i As Integer = 1 to result.Len
-		    Var c As String = Mid( result, i, 1 )
-		    UnitTests.ErrorIf c < "a" or c > "e"
-		  next
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -591,9 +498,9 @@ Protected Module UnitTests
 
 	#tag Method, Flags = &h21, CompatibilityFlags = TargetHasGUI
 		Private Sub TestReplaceRange()
-		  ErrorIf StringUtils.ReplaceRange( "abcde", 2, 3, "-" ) <> "a-e"
-		  ErrorIf StringUtils.ReplaceRange( "abcde", 1, 2, "***" ) <> "***cde"
-		  ErrorIf StringUtils.ReplaceRange( "abcde", 1, 10, "***" ) <> "***"
+		  ErrorIf StringUtils.ReplaceRange( "abcde", 1, 3, "-" ) <> "a-e"
+		  ErrorIf StringUtils.ReplaceRange( "abcde", 0, 2, "***" ) <> "***cde"
+		  ErrorIf StringUtils.ReplaceRange( "abcde", 0, 10, "***" ) <> "***"
 		  
 		End Sub
 	#tag EndMethod

@@ -9,7 +9,7 @@ You should be able to find the latest version via this URL:
 > 
 > and on GitHub: 
 > 
-> [https://github.com/Jeannot-Muller/Xojo-StringUtilsHarness-API2](https://jeannot-muller.com/)
+> [https://github.com/Jeannot-Muller/Xojo-StringUtilsHarness-API2](https://github.com/Jeannot-Muller/Xojo-StringUtilsHarness-API2)
 
 # License
 

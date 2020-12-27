@@ -3290,7 +3290,11 @@
    <NoteLine>The current administrative contact for it is Jeannot Muller (jeannot-muller.com).</NoteLine>
    <NoteLine>You should be able to find the latest version via this URL:</NoteLine>
    <NoteLine></NoteLine>
-   <NoteLine>    https://jeannot-muller.com/ and on GitHub: https://github.com/Jeannot-Muller/Xojo-StringUtilsHarness-API2</NoteLine>
+   <NoteLine>    https://jeannot-muller.com/ </NoteLine>
+   <NoteLine></NoteLine>
+   <NoteLine>        and on GitHub: </NoteLine>
+   <NoteLine></NoteLine>
+   <NoteLine>    https://github.com/Jeannot-Muller/Xojo-StringUtilsHarness-API2</NoteLine>
    <NoteLine></NoteLine>
    <NoteLine></NoteLine>
   </ItemSource>

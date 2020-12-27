@@ -84,7 +84,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var i, j, cost As Integer</SourceLine>
    <SourceLine>Var d(-1) As Integer</SourceLine>
-   <SourceLine>Redim d(m)</SourceLine>
+   <SourceLine>ReDim d(m)</SourceLine>
    <SourceLine>for j = 1 to m</SourceLine>
    <SourceLine>d(j) = j</SourceLine>
    <SourceLine>next</SourceLine>
@@ -147,8 +147,8 @@
    <SourceLine>// codes for the first several consonants.</SourceLine>
    <SourceLine>// For more detail, see: &lt;http://www.searchforancestors.com/soundex.html&gt;</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim prefix, prefixes(-1) As String</SourceLine>
-   <SourceLine>Dim i, prefixLen As Integer</SourceLine>
+   <SourceLine>Var prefix, prefixes(-1) As String</SourceLine>
+   <SourceLine>Var i, prefixLen As Integer</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>s = s.trim</SourceLine>
    <SourceLine></SourceLine>
@@ -163,9 +163,9 @@
    <SourceLine>next</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim c, out As String</SourceLine>
+   <SourceLine>Var c, out As String</SourceLine>
    <SourceLine>out = s.left(1).Uppercase</SourceLine>
-   <SourceLine>Dim sLen, curCode, lastCode As Integer</SourceLine>
+   <SourceLine>Var sLen, curCode, lastCode As Integer</SourceLine>
    <SourceLine>sLen = s.Length</SourceLine>
    <SourceLine>for i = 2 to sLen</SourceLine>
    <SourceLine>c = s.Middle(i-1, 1).Uppercase</SourceLine>
@@ -761,7 +761,7 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Integer</SourceLine>
-   <SourceLine>Redim out( fields.LastIndex )</SourceLine>
+   <SourceLine>ReDim out( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
    <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
@@ -796,7 +796,7 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Double</SourceLine>
-   <SourceLine>Redim out( fields.LastIndex )</SourceLine>
+   <SourceLine>ReDim out( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
    <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
@@ -826,13 +826,13 @@
    <SourceLine>// using the CDbl function.  This is appropriate for a set of numbers</SourceLine>
    <SourceLine>// entered or readable by the end-user.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim fields(-1) As String</SourceLine>
+   <SourceLine>Var fields(-1) As String</SourceLine>
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim out(-1) As Double</SourceLine>
-   <SourceLine>Redim out( fields.LastIndex )</SourceLine>
+   <SourceLine>Var out(-1) As Double</SourceLine>
+   <SourceLine>ReDim out( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim i As Integer</SourceLine>
+   <SourceLine>Var i As Integer</SourceLine>
    <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
    <SourceLine>out(i) = CDbl( fields(i) )</SourceLine>
    <SourceLine>next</SourceLine>
@@ -1392,7 +1392,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var qty As Integer</SourceLine>
    <SourceLine>qty = Ceiling( s.Length / fieldWidth )</SourceLine>
-   <SourceLine>Redim out( qty - 1 )</SourceLine>
+   <SourceLine>ReDim out( qty - 1 )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var pos, i As Integer</SourceLine>
    <SourceLine>pos = 0</SourceLine>
@@ -1467,7 +1467,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var qty As Integer</SourceLine>
    <SourceLine>qty = Ceiling( s.Bytes / fieldWidth )</SourceLine>
-   <SourceLine>Redim out( qty - 1 )</SourceLine>
+   <SourceLine>ReDim out( qty - 1 )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var pos, i As Integer</SourceLine>
    <SourceLine>pos = 0</SourceLine>
@@ -1655,7 +1655,7 @@
    <SourceLine>if foundUpper.LastIndex  &gt;= 1 then exit</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>// found a caseless character; reset our found list</SourceLine>
-   <SourceLine>Redim foundUpper(-1)</SourceLine>
+   <SourceLine>ReDim foundUpper(-1)</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -1799,7 +1799,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var quoted() As String</SourceLine>
    <SourceLine>Var ub As Integer = fields.LastIndex</SourceLine>
-   <SourceLine>Redim quoted( ub )</SourceLine>
+   <SourceLine>ReDim quoted( ub )</SourceLine>
    <SourceLine>for i As Integer = 0 to ub</SourceLine>
    <SourceLine>Var fld As String = fields(i)</SourceLine>
    <SourceLine>if fld.IndexOf( Delimiter ) &gt; -1 then</SourceLine>
@@ -2174,7 +2174,7 @@
    <SourceLine>if line.Length &lt;= charsPerLine then</SourceLine>
    <SourceLine>lines( lineNum ) = line</SourceLine>
    <SourceLine>else</SourceLine>
-   <SourceLine>Dim breakPos As Integer</SourceLine>
+   <SourceLine>Var breakPos As Integer</SourceLine>
    <SourceLine>for breakPos = charsPerLine DownTo 1</SourceLine>
    <SourceLine>Var c As String = line.middle( breakPos-1, 1 )</SourceLine>
    <SourceLine>if c &lt;= " " or c = "-" then exit</SourceLine>
@@ -2437,6 +2437,817 @@
   <IsShared>0</IsShared>
   <ItemParams>s As String</ItemParams>
   <ItemResult>String</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Metaphone</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>1779681279</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Metaphone(source As String, ByRef outPrimary As String, ByRef outAlternate As String)</SourceLine>
+   <SourceLine>// Compute the Double Metaphone of the source string.  This is an algorithm that</SourceLine>
+   <SourceLine>// finds one or two approximate phonetic representations of a string, useful in</SourceLine>
+   <SourceLine>// searching for almost-matches -- e.g., looking for names whose spelling may have</SourceLine>
+   <SourceLine>// varied, or correcting typos made by the user, and so on.</SourceLine>
+   <SourceLine>//</SourceLine>
+   <SourceLine>// The output is roughly human-readable, with the following conventions:</SourceLine>
+   <SourceLine>//   Vowels are omitted from the output, except for a vowel at the beginning</SourceLine>
+   <SourceLine>//      of a word, which is represented by an A (e.g. "ox" becomes "AKS")</SourceLine>
+   <SourceLine>//   X is used to represent a "ch" sound (e.g., "church" becomes "XRX")</SourceLine>
+   <SourceLine>//   0 (zero) is used to represent a "th" sound (e.g. "think" becomes "0NK")</SourceLine>
+   <SourceLine>//</SourceLine>
+   <SourceLine>// For more information about Double Metaphone, see:</SourceLine>
+   <SourceLine>//     http://aspell.sourceforge.net/metaphone/</SourceLine>
+   <SourceLine>//     http://www.cuj.com/articles/2000/0006/0006d/0006d.htm?topic=articles</SourceLine>
+   <SourceLine>//</SourceLine>
+   <SourceLine>// This implementation is based on the one at:</SourceLine>
+   <SourceLine>//     http://aspell.sourceforge.net/metaphone/dmetaph.cpp</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Dim length As Integer</SourceLine>
+   <SourceLine>length = source.Length</SourceLine>
+   <SourceLine>if length &lt; 1 then</SourceLine>
+   <SourceLine>outPrimary = ""</SourceLine>
+   <SourceLine>outAlternate = ""</SourceLine>
+   <SourceLine>return</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>source = source.Uppercase + " "</SourceLine>
+   <SourceLine>Dim current As Integer = 1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Dim charAt(-1) As String</SourceLine>
+   <SourceLine>charAt = source.Split("")</SourceLine>
+   <SourceLine>charAt.AddAt( 0, "" )  // (make it 1-based, like Mid)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Dim slavoGermanic As Boolean</SourceLine>
+   <SourceLine>if str("W").IndexOf( source ) &gt; -1 or str("K").IndexOf( source ) &gt; -1 _</SourceLine>
+   <SourceLine>or str("CZ").IndexOf( source ) &gt; -1 or str("WITZ").IndexOf( source ) &gt; -1 then</SourceLine>
+   <SourceLine>slavoGermanic = true</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Dim out1, out2 As String</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// skip these when at start of word</SourceLine>
+   <SourceLine>if MStringAt(source, 1, 2, "GN", "KN", "PN", "WR", "PS") then current = current + 1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// initial 'X' is pronounced 'Z' e.g. 'Xavier'</SourceLine>
+   <SourceLine>if charAt(1) = "X" then</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"  // "Z" maps to "S"</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>//---------- main loop ---------------</SourceLine>
+   <SourceLine>while current &lt;= length</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>select case charAt(current)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "A", "E", "I", "O", "U", "Y"</SourceLine>
+   <SourceLine>if current = 1 then</SourceLine>
+   <SourceLine>// all initial vowels map to "A"; elsewhere they're skipped</SourceLine>
+   <SourceLine>out1 = out1 + "A"  </SourceLine>
+   <SourceLine>out2 = out2 + "A"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "B"</SourceLine>
+   <SourceLine>//"-mb", e.g", "dumb", already skipped over...</SourceLine>
+   <SourceLine>out1 = out1 + "P"  </SourceLine>
+   <SourceLine>out2 = out2 + "P"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "B" then</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "Ç"</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "C"</SourceLine>
+   <SourceLine>// various germanic</SourceLine>
+   <SourceLine>if current &gt; 2 _</SourceLine>
+   <SourceLine>and not MIsVowel(source, current - 2) _</SourceLine>
+   <SourceLine>and MStringAt(source, (current - 1), 3, "ACH") _ </SourceLine>
+   <SourceLine>and (charAt(current + 2) &lt;&gt; "I" and (charAt(current + 2) &lt;&gt; "E"_</SourceLine>
+   <SourceLine>or MStringAt(source, current - 2, 6, "BACHER", "MACHER")) ) then       </SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif current = 1 AND MStringAt(source, current, 6, "CAESAR") then</SourceLine>
+   <SourceLine>// special case 'caesar' (why didn't this go at the top?)</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 4, "CHIA") then</SourceLine>
+   <SourceLine>// italian 'chianti'</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "CH") then       </SourceLine>
+   <SourceLine>// find 'michael'</SourceLine>
+   <SourceLine>if current &gt; 0 AND MStringAt(source, current, 4, "CHAE") then</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine>break</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif current = 0 _</SourceLine>
+   <SourceLine>and (MStringAt(source, current + 1, 5, "HARAC", "HARIS") _</SourceLine>
+   <SourceLine>or MStringAt(source, current + 1, 3, "HOR", "HYM", "HIA", "HEM")) _</SourceLine>
+   <SourceLine>and not MStringAt(source, 0, 5, "CHORE") then</SourceLine>
+   <SourceLine>// greek roots e.g. 'chemistry', 'chorus'</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//germanic, greek, or otherwise 'ch' for 'kh' sound</SourceLine>
+   <SourceLine>if((MStringAt(source, 0, 4, "VAN ", "VON ") or MStringAt(source, 0, 3, "SCH")) _</SourceLine>
+   <SourceLine>_ // 'architect but not 'arch', 'orchestra', 'orchid'</SourceLine>
+   <SourceLine>or MStringAt(source, current - 2, 6, "ORCHES", "ARCHIT", "ORCHID") _</SourceLine>
+   <SourceLine>or MStringAt(source, current + 2, 1, "T", "S") _</SourceLine>
+   <SourceLine>or ((MStringAt(source, current - 1, 1, "A", "O", "U", "E") OR current = 1) _</SourceLine>
+   <SourceLine>_ //e.g., 'wachtler', 'wechsler', but not 'tichner'</SourceLine>
+   <SourceLine>and MStringAt(source, current + 2, 1, "L", "R", "N", "M", "B", "H", "F", "V", "W", " "))) then</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>else  </SourceLine>
+   <SourceLine>if current &gt; 1 then</SourceLine>
+   <SourceLine>if MStringAt(source, 1, 2, "MC") then</SourceLine>
+   <SourceLine>//e.g., "McHugh"</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current + 2</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// end of CH case</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "CZ") and not MStringAt(source, current - 2, 4, "WICZ") then</SourceLine>
+   <SourceLine>//e.g, 'czerny'</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current + 1, 3, "CIA") then</SourceLine>
+   <SourceLine>//e.g., 'focaccia'</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "CC") and not (current = 2 AND charAt(1) = "M") then</SourceLine>
+   <SourceLine>// double "C", but not if e.g. 'McClellan'</SourceLine>
+   <SourceLine>//'bellocchio' but not 'bacchus'</SourceLine>
+   <SourceLine>if MStringAt(source, current + 2, 1, "I", "E", "H") and not MStringAt(source, current + 2, 2, "HU") then</SourceLine>
+   <SourceLine>//'accident', 'accede" "succeed'</SourceLine>
+   <SourceLine>if((current = 2 AND charAt(current - 1) = "A") _</SourceLine>
+   <SourceLine>OR MStringAt(source, current - 1, 5, "UCCEE", "UCCES")) then</SourceLine>
+   <SourceLine>out1 = out1 + "KS"  </SourceLine>
+   <SourceLine>out2 = out2 + "KS"</SourceLine>
+   <SourceLine>//'bacci', 'bertucci', other italian</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine>else // Pierce's rule</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "CK", "CG", "CQ") then</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "CI", "CE", "CY") then</SourceLine>
+   <SourceLine>// italian vs. english</SourceLine>
+   <SourceLine>if MStringAt(source, current, 3, "CIO", "CIE", "CIA") then</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>// all other C cases are considered a K:</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// name sent in 'mac caffrey', 'mac gregor'</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 2, " C", " Q", " G" ) then</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 1, "C", "K", "Q") _</SourceLine>
+   <SourceLine>AND not MStringAt(source, current + 1, 2, "CE", "CI") then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "D"</SourceLine>
+   <SourceLine>if MStringAt(source, current, 2, "DG") then</SourceLine>
+   <SourceLine>if MStringAt(source, current + 2, 1, "I", "E", "Y") then</SourceLine>
+   <SourceLine>//e.g. 'edge'</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//e.g. 'edgar'</SourceLine>
+   <SourceLine>out1 = out1 + "TK"  </SourceLine>
+   <SourceLine>out2 = out2 + "TK"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "DT", "DD") then</SourceLine>
+   <SourceLine>out1 = out1 + "T"  </SourceLine>
+   <SourceLine>out2 = out2 + "T"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "T"  </SourceLine>
+   <SourceLine>out2 = out2 + "T"</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "F"</SourceLine>
+   <SourceLine>out1 = out1 + "F"  </SourceLine>
+   <SourceLine>out2 = out2 + "F"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "F" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "G"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "H"  then</SourceLine>
+   <SourceLine>// GH...</SourceLine>
+   <SourceLine>if current &gt; 1 AND not MIsVowel(source, current - 1) then</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif current = 1 then</SourceLine>
+   <SourceLine>//'ghislane', ghiradelli</SourceLine>
+   <SourceLine>if charAt(current + 2) = "I" then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif((current &gt; 2 AND MStringAt(source, current - 2, 1, "B", "H", "D") ) _</SourceLine>
+   <SourceLine>_ //e.g., 'bough'</SourceLine>
+   <SourceLine>OR (current &gt; 3 AND MStringAt(source, current - 3, 1, "B", "H", "D") ) _</SourceLine>
+   <SourceLine>_ //e.g., 'broughton'</SourceLine>
+   <SourceLine>OR (current &gt; 4 AND MStringAt(source, current - 4, 1, "B", "H") ) ) then</SourceLine>
+   <SourceLine>//Parker's rule (with some further refinements) - e.g., 'hugh'</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//e.g., 'laugh', 'McLaughlin', 'cough', 'gough', 'rough', 'tough'</SourceLine>
+   <SourceLine>if current &gt; 3 _</SourceLine>
+   <SourceLine>AND charAt(current - 1) = "U" _</SourceLine>
+   <SourceLine>AND MStringAt(source, current - 3, 1, "C", "G", "L", "R", "T") then</SourceLine>
+   <SourceLine>out1 = out1 + "F"  </SourceLine>
+   <SourceLine>out2 = out2 + "F"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if((current &gt; 0) AND charAt(current - 1) &lt;&gt; "I") then</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif charAt(current + 1) = "N" then</SourceLine>
+   <SourceLine>// GN...</SourceLine>
+   <SourceLine>if current = 1 AND MIsVowel(source, 0) AND not SlavoGermanic then</SourceLine>
+   <SourceLine>out1 = out1 + "KN"  </SourceLine>
+   <SourceLine>out2 = out2 + "N"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//not e.g. 'cagney'</SourceLine>
+   <SourceLine>if not MStringAt(source, current + 2, 2, "EY") _</SourceLine>
+   <SourceLine>AND charAt(current + 1) &lt;&gt; "Y" AND not SlavoGermanic then</SourceLine>
+   <SourceLine>out1 = out1 + "N"  </SourceLine>
+   <SourceLine>out2 = out2 + "KN"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "KN"  </SourceLine>
+   <SourceLine>out2 = out2 + "KN"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current + 1, 2, "LI") AND not SlavoGermanic then</SourceLine>
+   <SourceLine>//'tagliaro'</SourceLine>
+   <SourceLine>out1 = out1 + "KL"  </SourceLine>
+   <SourceLine>out2 = out2 + "L"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif current = 1 _</SourceLine>
+   <SourceLine>AND (charAt(current + 1) = "Y"  _</SourceLine>
+   <SourceLine>OR MStringAt(source, current + 1, 2, "ES", "EP", "EB", "EL", "EY", "IB", "IL", "IN", "IE", "EI", "ER")) then</SourceLine>
+   <SourceLine>//ges-,gep-,gel-, gie- at beginning</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif (MStringAt(source, current + 1, 2, "ER") OR charAt(current + 1) = "Y") _</SourceLine>
+   <SourceLine>AND not MStringAt(source, 1, 6, "DANGER", "RANGER", "MANGER") _</SourceLine>
+   <SourceLine>AND not MStringAt(source, current - 1, 1, "E", "I") _</SourceLine>
+   <SourceLine>AND not MStringAt(source, current - 1, 3, "RGY", "OGY") then</SourceLine>
+   <SourceLine>// -ger-,  -gy-</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current + 1, 1, "E", "I", "Y") OR MStringAt(source, current - 1, 4, "AGGI", "OGGI") then</SourceLine>
+   <SourceLine>// italian e.g, 'biaggi'</SourceLine>
+   <SourceLine>//obvious germanic</SourceLine>
+   <SourceLine>if MStringAt(source, 1, 4, "VAN ", "VON ") OR MStringAt(source, 1, 3, "SCH") _</SourceLine>
+   <SourceLine>OR MStringAt(source, current + 1, 2, "ET") then</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//always soft if french ending</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 4, "IER ") then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>// any other G</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "G" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "H"</SourceLine>
+   <SourceLine>//only keep if first &amp; before vowel or btw. 2 vowels</SourceLine>
+   <SourceLine>if (current = 1 OR MIsVowel(source, current - 1)) AND MIsVowel(source, current + 1) then</SourceLine>
+   <SourceLine>out1 = out1 + "H"  </SourceLine>
+   <SourceLine>out2 = out2 + "H"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else//also takes care of 'HH'</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "J"</SourceLine>
+   <SourceLine>//obvious spanish, 'jose', 'san jacinto'</SourceLine>
+   <SourceLine>if MStringAt(source, current, 4, "JOSE") OR MStringAt(source, 1, 4, "SAN ") then</SourceLine>
+   <SourceLine>if (current = 0 AND charAt(current + 4) = " ") OR MStringAt(source, 1, 4, "SAN ") then</SourceLine>
+   <SourceLine>out1 = out1 + "H"  </SourceLine>
+   <SourceLine>out2 = out2 + "H"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "H"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if current = 0 AND not MStringAt(source, current, 4, "JOSE") then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "A"//Yankelovich/Jankelowicz</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//spanish pron. of e.g. 'bajador'</SourceLine>
+   <SourceLine>if MIsVowel(source, current - 1) _</SourceLine>
+   <SourceLine>AND not SlavoGermanic _</SourceLine>
+   <SourceLine>AND (charAt(current + 1) = "A" OR charAt(current + 1) = "O") then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "H"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if current = length then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + ""</SourceLine>
+   <SourceLine>elseif not MStringAt(source, current + 1, 1, "L", "T", "K", "S", "N", "M", "B", "Z") _</SourceLine>
+   <SourceLine>AND not MStringAt(source, current - 1, 1, "S", "K", "L") then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if charAt(current + 1) = "J" then //it could happen! </SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "K"</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "K" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "L"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "L" then</SourceLine>
+   <SourceLine>//spanish e.g. 'cabrillo', 'gallegos'</SourceLine>
+   <SourceLine>if (current = length - 2 AND MStringAt(source, current - 1, 4, "ILLO", "ILLA", "ALLE")) _</SourceLine>
+   <SourceLine>OR ((MStringAt(source, length - 1, 2, "AS", "OS") OR MStringAt(source, length, 1, "A", "O")) _</SourceLine>
+   <SourceLine>AND MStringAt(source, current - 1, 4, "ALLE")) then</SourceLine>
+   <SourceLine>out1 = out1 + "L"  </SourceLine>
+   <SourceLine>out2 = out2 + ""</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "L"  </SourceLine>
+   <SourceLine>out2 = out2 + "L"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "L"  </SourceLine>
+   <SourceLine>out2 = out2 + "L"</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "M"</SourceLine>
+   <SourceLine>out1 = out1 + "M"  </SourceLine>
+   <SourceLine>out2 = out2 + "M"</SourceLine>
+   <SourceLine>if (MStringAt(source, current - 1, 3, "UMB") _ </SourceLine>
+   <SourceLine>AND (current + 1 = length OR MStringAt(source, current + 2, 2, "ER"))) _</SourceLine>
+   <SourceLine>_ //'dumb","thumb'</SourceLine>
+   <SourceLine>OR charAt(current + 1) = "M" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "N"</SourceLine>
+   <SourceLine>out1 = out1 + "N"  </SourceLine>
+   <SourceLine>out2 = out2 + "N"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "N" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "Ñ"</SourceLine>
+   <SourceLine>out1 = out1 + "N"  </SourceLine>
+   <SourceLine>out2 = out2 + "N"</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "P"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "H" then  // PH sounds like F</SourceLine>
+   <SourceLine>out1 = out1 + "F"  </SourceLine>
+   <SourceLine>out2 = out2 + "F"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "P"  </SourceLine>
+   <SourceLine>out2 = out2 + "P"</SourceLine>
+   <SourceLine>// (also account for "campbell", "raspberry")</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 1, "P", "B") then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "Q"</SourceLine>
+   <SourceLine>out1 = out1 + "K"  </SourceLine>
+   <SourceLine>out2 = out2 + "K"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "Q" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "R"</SourceLine>
+   <SourceLine>//french e.g. 'rogier', but exclude 'hochmeier'</SourceLine>
+   <SourceLine>if current = length AND not SlavoGermanic _</SourceLine>
+   <SourceLine>AND MStringAt(source, current - 2, 2, "IE") _ </SourceLine>
+   <SourceLine>AND not MStringAt(source, current - 4, 2, "ME", "MA") then</SourceLine>
+   <SourceLine>out1 = out1 + ""  </SourceLine>
+   <SourceLine>out2 = out2 + "R"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "R"  </SourceLine>
+   <SourceLine>out2 = out2 + "R"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if charAt(current + 1) = "R" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "S"</SourceLine>
+   <SourceLine>if MStringAt(source, current - 1, 3, "ISL", "YSL") then</SourceLine>
+   <SourceLine>//special cases 'island', 'isle', 'carlisle', 'carlysle'</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif current = 1 AND MStringAt(source, current, 5, "SUGAR") then</SourceLine>
+   <SourceLine>//special case 'sugar-'</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "SH") then</SourceLine>
+   <SourceLine>//germanic</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 4, "HEIM", "HOEK", "HOLM", "HOLZ") then</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 3, "SIO", "SIA") OR MStringAt(source, current, 4, "SIAN") then</SourceLine>
+   <SourceLine>//italian &amp; armenian</SourceLine>
+   <SourceLine>if not SlavoGermanic then</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif (current = 1 AND MStringAt(source, current + 1, 1, "M", "N", "L", "W")) _</SourceLine>
+   <SourceLine>OR MStringAt(source, current + 1, 1, "Z") then</SourceLine>
+   <SourceLine>//german &amp; anglicisations, e.g. 'smith' match 'schmidt', 'snider' match 'schneider'</SourceLine>
+   <SourceLine>//also, -sz- in slavic language altho in hungarian it is pronounced "s"</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 1, "Z") then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "SC") then</SourceLine>
+   <SourceLine>//Schlesinger's rule</SourceLine>
+   <SourceLine>if charAt(current + 2) = "H" then</SourceLine>
+   <SourceLine>//dutch origin, e.g. 'school', 'schooner'</SourceLine>
+   <SourceLine>if MStringAt(source, current + 3, 2, "OO", "ER", "EN", "UY", "ED", "EM") then</SourceLine>
+   <SourceLine>//'schermerhorn', 'schenker'</SourceLine>
+   <SourceLine>if MStringAt(source, current + 3, 2, "ER", "EN") then</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "SK"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "SK"  </SourceLine>
+   <SourceLine>out2 = out2 + "SK"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if current = 1 AND not MIsVowel(source, 4) AND charAt(4) &lt;&gt; "W" then</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current + 2, 1, "I", "E", "Y") then</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "SK"  </SourceLine>
+   <SourceLine>out2 = out2 + "SK"</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//french e.g. 'resnais', 'artois'</SourceLine>
+   <SourceLine>if current = length AND MStringAt(source, current - 2, 2, "AI", "OI") then</SourceLine>
+   <SourceLine>out1 = out1 + ""  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 1, "S", "Z") then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "T"</SourceLine>
+   <SourceLine>if MStringAt(source, current, 4, "TION") then</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 3, "TIA", "TCH") then</SourceLine>
+   <SourceLine>out1 = out1 + "X"  </SourceLine>
+   <SourceLine>out2 = out2 + "X"</SourceLine>
+   <SourceLine>current = current +  3</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 2, "TH") OR MStringAt(source, current, 3, "TTH") then</SourceLine>
+   <SourceLine>//special case 'thomas', 'thames' or germanic</SourceLine>
+   <SourceLine>if MStringAt(source, current + 2, 2, "OM", "AM") _</SourceLine>
+   <SourceLine>OR MStringAt(source, 1, 4, "VAN ", "VON ") OR MStringAt(source, 1, 3, "SCH") then</SourceLine>
+   <SourceLine>out1 = out1 + "T"  </SourceLine>
+   <SourceLine>out2 = out2 + "T"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "0"     // 0 represents "TH" sound in Metaphone</SourceLine>
+   <SourceLine>out2 = out2 + "T"     // (a bad choice -- # would have been better)</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "T"  </SourceLine>
+   <SourceLine>out2 = out2 + "T"</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 1, "T", "D") then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "V"</SourceLine>
+   <SourceLine>out1 = out1 + "F"  </SourceLine>
+   <SourceLine>out2 = out2 + "F"</SourceLine>
+   <SourceLine>if charAt(current + 1) = "V" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "W"</SourceLine>
+   <SourceLine>//can also be in middle of word</SourceLine>
+   <SourceLine>if MStringAt(source, current, 2, "WR") then</SourceLine>
+   <SourceLine>out1 = out1 + "R"  </SourceLine>
+   <SourceLine>out2 = out2 + "R"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if current = 1 AND (MIsVowel(source, current + 1) OR MStringAt(source, current, 2, "WH")) then</SourceLine>
+   <SourceLine>//Wasserman should match Vasserman</SourceLine>
+   <SourceLine>if(MIsVowel(source, current + 1)) then</SourceLine>
+   <SourceLine>out1 = out1 + "A"  </SourceLine>
+   <SourceLine>out2 = out2 + "F"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//need Uomo to match Womo</SourceLine>
+   <SourceLine>out1 = out1 + "A"  </SourceLine>
+   <SourceLine>out2 = out2 + "A"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if (current = length AND MIsVowel(source, current - 1)) _</SourceLine>
+   <SourceLine>OR MStringAt(source, current - 1, 5, "EWSKI", "EWSKY", "OWSKI", "OWSKY") _</SourceLine>
+   <SourceLine>OR MStringAt(source, 1, 3, "SCH") then</SourceLine>
+   <SourceLine>//Arnow should match Arnoff</SourceLine>
+   <SourceLine>out1 = out1 + ""  </SourceLine>
+   <SourceLine>out2 = out2 + "F"</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>elseif MStringAt(source, current, 4, "WICZ", "WITZ") then</SourceLine>
+   <SourceLine>//polish e.g. 'filipowicz'</SourceLine>
+   <SourceLine>out1 = out1 + "TS"  </SourceLine>
+   <SourceLine>out2 = out2 + "FX"</SourceLine>
+   <SourceLine>current = current + 4</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>//else skip it</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "X"</SourceLine>
+   <SourceLine>//french e.g. breaux</SourceLine>
+   <SourceLine>if not (current = length AND _</SourceLine>
+   <SourceLine>(MStringAt(source, current - 3, 3, "IAU", "EAU") OR MStringAt(source, current - 2, 2, "AU", "OU"))) then</SourceLine>
+   <SourceLine>out1 = out1 + "KS"  </SourceLine>
+   <SourceLine>out2 = out2 + "KS"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 1, "C", "X") then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>case "Z"</SourceLine>
+   <SourceLine>//chinese pinyin e.g. 'zhao'</SourceLine>
+   <SourceLine>if charAt(current + 1) = "H" then</SourceLine>
+   <SourceLine>out1 = out1 + "J"  </SourceLine>
+   <SourceLine>out2 = out2 + "J"</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>if MStringAt(source, current + 1, 2, "ZO", "ZI", "ZA") _</SourceLine>
+   <SourceLine>OR (SlavoGermanic AND current &gt; 1 AND charAt(current - 1) &lt;&gt; "T") then</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "TS"</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>out1 = out1 + "S"  </SourceLine>
+   <SourceLine>out2 = out2 + "S"</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if charAt(current + 1) = "Z" then</SourceLine>
+   <SourceLine>current = current +  2</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>current = current +  1</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// ----</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>// if none of the above cases, just skip this character</SourceLine>
+   <SourceLine>current = current + 1</SourceLine>
+   <SourceLine>end Select</SourceLine>
+   <SourceLine>wend</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>outPrimary = out1</SourceLine>
+   <SourceLine>outAlternate = out2</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>1</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams>source As String, ByRef outPrimary As String, ByRef outAlternate As String</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>MStringAt</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>1874302975</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function MStringAt(source As String, start As Integer, length As Integer, ParamArray args As String) As Boolean</SourceLine>
+   <SourceLine>// This is a private helper function for the Metaphone method.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if start &lt; 1 then return false</SourceLine>
+   <SourceLine>Dim target As String</SourceLine>
+   <SourceLine>if start &gt; source.Length then</SourceLine>
+   <SourceLine>target = " "</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>target = source.Middle( start-1, length )</SourceLine>
+   <SourceLine>end if</SourceLine>
+   <SourceLine>return (args.IndexOf(target) &gt;= 0)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>33</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams>source As String, start As Integer, length As Integer, ParamArray args As String</ItemParams>
+  <ItemResult>Boolean</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>MisVowel</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>168368127</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function MisVowel(source As String, atPos As Integer) As Boolean</SourceLine>
+   <SourceLine>// This is a private helper function for the Metaphone method.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>return str("AEIOUY").IndexOf( source.Middle(atPos-1, 1) ) &gt; -1</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>33</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams>source As String, atPos As Integer</ItemParams>
+  <ItemResult>Boolean</ItemResult>
  </Method>
  <Note>
   <ItemName>Contributors</ItemName>

@@ -24,6 +24,7 @@ Many people have contributed to the development of this module, including:
 
 ## API2
 Jeannot Muller, [dr@jeannot-muller.com]() (*)
+
 (*) To whom correspondence should be addressed.
 
 ## API1

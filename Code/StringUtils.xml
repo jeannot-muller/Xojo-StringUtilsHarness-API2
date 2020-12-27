@@ -3286,11 +3286,11 @@
    <TextEncoding>134217984</TextEncoding>
    <NoteLine>Home Page</NoteLine>
    <NoteLine></NoteLine>
-   <NoteLine>This StringUtils module is maintained by Verified Express, LLC.</NoteLine>
-   <NoteLine>The current administrative contact for it is Joe Strout (joe@strout.net).</NoteLine>
+   <NoteLine>This StringUtils module in the API Version 2 is maintained by TECcompanion GmbH.</NoteLine>
+   <NoteLine>The current administrative contact for it is Jeannot Muller (jeannot-muller.com).</NoteLine>
    <NoteLine>You should be able to find the latest version via this URL:</NoteLine>
    <NoteLine></NoteLine>
-   <NoteLine>    http://www.verex.com/opensource/</NoteLine>
+   <NoteLine>    https://jeannot-muller.com/ and on GitHub: https://github.com/Jeannot-Muller/Xojo-StringUtilsHarness-API2</NoteLine>
    <NoteLine></NoteLine>
    <NoteLine></NoteLine>
   </ItemSource>
@@ -3304,10 +3304,6 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <NoteLine>Version History</NoteLine>
-   <NoteLine>2020-DEC-27: version 2.0</NoteLine>
-   <NoteLine>- First public release.</NoteLine>
-   <NoteLine>- Conversion to Xojo API2</NoteLine>
-   <NoteLine></NoteLine>
    <NoteLine>2004-JUL-17: version 1.0</NoteLine>
    <NoteLine>- First public release.</NoteLine>
    <NoteLine></NoteLine>
@@ -3388,6 +3384,13 @@
    <NoteLine>2012-AUG-10: version 2.0</NoteLine>
    <NoteLine>- Fixed a bug in Sprintf that caused incorrect results in some cases when the</NoteLine>
    <NoteLine>  replacement values contained non-ASCII characters.</NoteLine>
+   <NoteLine></NoteLine>
+   <NoteLine>2020-DEC-26: version 2.1</NoteLine>
+   <NoteLine>- First public release.</NoteLine>
+   <NoteLine>- Conversion to Xojo API2</NoteLine>
+   <NoteLine></NoteLine>
+   <NoteLine>2020-DEC-27: version 2.2</NoteLine>
+   <NoteLine>- Added API1 and API2 versions as a binaryfile to the repository.</NoteLine>
    <NoteLine></NoteLine>
   </ItemSource>
   <ItemFlags>1</ItemFlags>

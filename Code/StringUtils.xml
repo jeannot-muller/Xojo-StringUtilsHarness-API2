@@ -84,7 +84,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var i, j, cost As Integer</SourceLine>
    <SourceLine>Var d(-1) As Integer</SourceLine>
-   <SourceLine>ReDim d(m)</SourceLine>
+   <SourceLine>d.ResizeTo(m)</SourceLine>
    <SourceLine>for j = 1 to m</SourceLine>
    <SourceLine>d(j) = j</SourceLine>
    <SourceLine>next</SourceLine>
@@ -761,7 +761,7 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Integer</SourceLine>
-   <SourceLine>ReDim out( fields.LastIndex )</SourceLine>
+   <SourceLine>out.ResizeTo( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
    <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
@@ -796,7 +796,7 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Double</SourceLine>
-   <SourceLine>ReDim out( fields.LastIndex )</SourceLine>
+   <SourceLine>out.ResizeTo( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
    <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
@@ -830,7 +830,7 @@
    <SourceLine>fields = source.Split(delimiter)</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var out(-1) As Double</SourceLine>
-   <SourceLine>ReDim out( fields.LastIndex )</SourceLine>
+   <SourceLine>out.ResizeTo( fields.LastIndex )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var i As Integer</SourceLine>
    <SourceLine>for i = fields.LastIndex DownTo 0</SourceLine>
@@ -1392,7 +1392,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var qty As Integer</SourceLine>
    <SourceLine>qty = Ceiling( s.Length / fieldWidth )</SourceLine>
-   <SourceLine>ReDim out( qty - 1 )</SourceLine>
+   <SourceLine>out.ResizeTo( qty - 1 )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var pos, i As Integer</SourceLine>
    <SourceLine>pos = 0</SourceLine>
@@ -1467,7 +1467,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var qty As Integer</SourceLine>
    <SourceLine>qty = Ceiling( s.Bytes / fieldWidth )</SourceLine>
-   <SourceLine>ReDim out( qty - 1 )</SourceLine>
+   <SourceLine>out.ResizeTo( qty - 1 )</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Var pos, i As Integer</SourceLine>
    <SourceLine>pos = 0</SourceLine>
@@ -1655,7 +1655,7 @@
    <SourceLine>if foundUpper.LastIndex  &gt;= 1 then exit</SourceLine>
    <SourceLine>else</SourceLine>
    <SourceLine>// found a caseless character; reset our found list</SourceLine>
-   <SourceLine>ReDim foundUpper(-1)</SourceLine>
+   <SourceLine>foundUpper.ResizeTo(-1)</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine>next</SourceLine>
    <SourceLine></SourceLine>
@@ -1799,7 +1799,7 @@
    <SourceLine></SourceLine>
    <SourceLine>Var quoted() As String</SourceLine>
    <SourceLine>Var ub As Integer = fields.LastIndex</SourceLine>
-   <SourceLine>ReDim quoted( ub )</SourceLine>
+   <SourceLine>quoted.ResizeTo( ub )</SourceLine>
    <SourceLine>for i As Integer = 0 to ub</SourceLine>
    <SourceLine>Var fld As String = fields(i)</SourceLine>
    <SourceLine>if fld.IndexOf( Delimiter ) &gt; -1 then</SourceLine>
@@ -3270,6 +3270,7 @@
    <NoteLine>Florent Pillet, florent@florentpillet.com</NoteLine>
    <NoteLine>Kem Tekinay, ktekinay@mactechnologies.com</NoteLine>
    <NoteLine>Charles Yeomans, yeomans@desuetude.com</NoteLine>
+   <NoteLine>Robert Livingston</NoteLine>
    <NoteLine></NoteLine>
    <NoteLine>(*) To whom correspondence should be addressed.</NoteLine>
    <NoteLine></NoteLine>
@@ -3396,6 +3397,9 @@
    <NoteLine>2020-DEC-27: version 2.2</NoteLine>
    <NoteLine>- Added API1 and API2 versions as a binaryfile to the repository.</NoteLine>
    <NoteLine></NoteLine>
+   <NoteLine>2020-DEC-29: version 2.3</NoteLine>
+   <NoteLine>- Feedback from Robert Livingston implemented: </NoteLine>
+   <NoteLine>  "ReDim arr()" replaced by "arr.ResizeTo()"</NoteLine>
   </ItemSource>
   <ItemFlags>1</ItemFlags>
  </Note>

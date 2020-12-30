@@ -61,7 +61,7 @@
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Function EditDistance(s1 As String, s2 As String) As Integer</SourceLine>
    <SourceLine>// Return the Levenshtein distance, aka the edit distance,</SourceLine>
-   <SourceLine>// between the two StringUtils.  That's the number of insertions,</SourceLine>
+   <SourceLine>// between the two Strings.  That's the number of insertions,</SourceLine>
    <SourceLine>// deletions, or changes required to make one string match the other.</SourceLine>
    <SourceLine>// A result of 0 means the strings</SourceLine>
    <SourceLine>// are identical; higher values mean more different.</SourceLine>
@@ -1590,7 +1590,7 @@
    <SourceLine></SourceLine>
    <SourceLine>if s = "" then return ""</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>#if RBVersion &gt; 5.5</SourceLine>
+   <SourceLine>#if XojoVersion &gt; 5.5</SourceLine>
    <SourceLine>Static HexTable as MemoryBlock</SourceLine>
    <SourceLine>#else</SourceLine>
    <SourceLine>Var HexTable as MemoryBlock</SourceLine>
@@ -2465,7 +2465,7 @@
    <SourceLine>//     http://aspell.sourceforge.net/metaphone/dmetaph.cpp</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim length As Integer</SourceLine>
+   <SourceLine>Var length As Integer</SourceLine>
    <SourceLine>length = source.Length</SourceLine>
    <SourceLine>if length &lt; 1 then</SourceLine>
    <SourceLine>outPrimary = ""</SourceLine>
@@ -2474,19 +2474,19 @@
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>source = source.Uppercase + " "</SourceLine>
-   <SourceLine>Dim current As Integer = 1</SourceLine>
+   <SourceLine>Var current As Integer = 1</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim charAt(-1) As String</SourceLine>
+   <SourceLine>Var charAt(-1) As String</SourceLine>
    <SourceLine>charAt = source.Split("")</SourceLine>
    <SourceLine>charAt.AddAt( 0, "" )  // (make it 1-based, like Mid)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim slavoGermanic As Boolean</SourceLine>
+   <SourceLine>Var slavoGermanic As Boolean</SourceLine>
    <SourceLine>if str("W").IndexOf( source ) &gt; -1 or str("K").IndexOf( source ) &gt; -1 _</SourceLine>
    <SourceLine>or str("CZ").IndexOf( source ) &gt; -1 or str("WITZ").IndexOf( source ) &gt; -1 then</SourceLine>
    <SourceLine>slavoGermanic = true</SourceLine>
    <SourceLine>end if</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>Dim out1, out2 As String</SourceLine>
+   <SourceLine>Var out1, out2 As String</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// skip these when at start of word</SourceLine>
    <SourceLine>if MStringAt(source, 1, 2, "GN", "KN", "PN", "WR", "PS") then current = current + 1</SourceLine>
@@ -3400,6 +3400,15 @@
    <NoteLine>2020-DEC-29: version 2.3</NoteLine>
    <NoteLine>- Feedback from Robert Livingston implemented: </NoteLine>
    <NoteLine>  "ReDim arr()" replaced by "arr.ResizeTo()"</NoteLine>
+   <NoteLine></NoteLine>
+   <NoteLine>2020-DEC-30: version 2.4</NoteLine>
+   <NoteLine>- Method HexB used the deprecated version "RBVersion" (This item was deprecated </NoteLine>
+   <NoteLine>  in version 2013r1). Command replaced with "XojoVersion" as a replacement.</NoteLine>
+   <NoteLine>- In the comments for EditDistance, "StringUtils" changed to "strings".</NoteLine>
+   <NoteLine>- In the "Metaphone" method of the StringUtil the "Dim" statments remained. They</NoteLine>
+   <NoteLine>  are now replaced by "Var".</NoteLine>
+   <NoteLine>&#32;&#32;</NoteLine>
+   <NoteLine></NoteLine>
   </ItemSource>
   <ItemFlags>1</ItemFlags>
  </Note>

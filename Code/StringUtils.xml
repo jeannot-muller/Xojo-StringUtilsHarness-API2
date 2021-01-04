@@ -1131,15 +1131,17 @@
   <ItemResult>String</ItemResult>
  </Method>
  <Method>
-  <ItemName>EndsWith</ItemName>
+  <ItemName>EndsWithOld</ItemName>
   <Compatibility></Compatibility>
   <Visible>1</Visible>
   <PartID>238155775</PartID>
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
-   <SourceLine>Function EndsWith(extends s As String, withWhat As String) As Boolean</SourceLine>
+   <SourceLine>Function EndsWithOld(extends s As String, withWhat As String) As Boolean</SourceLine>
    <SourceLine>// Return true if 's' ends with the string 'withWhat',</SourceLine>
    <SourceLine>// doing a standard string comparison.</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Jeannot Muller: name changed to EndWithOld from EndsWith as Xojo implemented this method into the Core </SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>return s.right( withWhat.Length) = withWhat</SourceLine>
    <SourceLine></SourceLine>
@@ -3402,11 +3404,14 @@
    <NoteLine>  "ReDim arr()" replaced by "arr.ResizeTo()"</NoteLine>
    <NoteLine></NoteLine>
    <NoteLine>2020-DEC-30: version 2.4</NoteLine>
-   <NoteLine>- Method HexB used the deprecated version "RBVersion" (This item was deprecated </NoteLine>
+   <NoteLine>- Method HexB used the deprecated version "RBVersion" in Stringutils (This item was deprecated </NoteLine>
    <NoteLine>  in version 2013r1). Command replaced with "XojoVersion" as a replacement.</NoteLine>
    <NoteLine>- In the comments for EditDistance, "StringUtils" changed to "strings".</NoteLine>
    <NoteLine>- In the "Metaphone" method of the StringUtil the "Dim" statments remained. They</NoteLine>
    <NoteLine>  are now replaced by "Var".</NoteLine>
+   <NoteLine></NoteLine>
+   <NoteLine>2021-JAN-04: version 2.5</NoteLine>
+   <NoteLine>- Renamed method "EndsWidth" to "EndWidthOld" as Xojo implemented a similar method into the Core</NoteLine>
    <NoteLine>&#32;&#32;</NoteLine>
    <NoteLine></NoteLine>
   </ItemSource>

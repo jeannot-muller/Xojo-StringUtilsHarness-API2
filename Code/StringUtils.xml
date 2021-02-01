@@ -656,27 +656,6 @@
   <ItemResult>Boolean</ItemResult>
  </Method>
  <Method>
-  <ItemName>IsEmpty</ItemName>
-  <Compatibility></Compatibility>
-  <Visible>1</Visible>
-  <PartID>1478387711</PartID>
-  <ItemSource>
-   <TextEncoding>134217984</TextEncoding>
-   <SourceLine>Function IsEmpty(extends s As String) As Boolean</SourceLine>
-   <SourceLine>// Return true if the string is empty.</SourceLine>
-   <SourceLine></SourceLine>
-   <SourceLine>return s = ""</SourceLine>
-   <SourceLine></SourceLine>
-   <SourceLine>End Function</SourceLine>
-  </ItemSource>
-  <TextEncoding>134217984</TextEncoding>
-  <AliasName></AliasName>
-  <ItemFlags>0</ItemFlags>
-  <IsShared>0</IsShared>
-  <ItemParams>extends s As String</ItemParams>
-  <ItemResult>Boolean</ItemResult>
- </Method>
- <Method>
   <ItemName>InStrReverse</ItemName>
   <Compatibility></Compatibility>
   <Visible>1</Visible>
@@ -3413,7 +3392,8 @@
    <NoteLine>2021-JAN-04: version 2.5</NoteLine>
    <NoteLine>- Renamed method "EndsWidth" to "EndWidthOld" as Xojo implemented a similar method into the Core</NoteLine>
    <NoteLine>&#32;&#32;</NoteLine>
-   <NoteLine></NoteLine>
+   <NoteLine>2021-FEB-01: version 2.6</NoteLine>
+   <NoteLine>- Deleted method isEmpty, as it is meanwhile part of Xojo Core</NoteLine>
   </ItemSource>
   <ItemFlags>1</ItemFlags>
  </Note>
